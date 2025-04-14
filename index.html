@@ -7,12 +7,14 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Intro -->
   <div class="intro">
     <h1>Alisson Andrea Huerta Mejía 👉👈❤️</h1>
     <p>Antes de decir cualquier cosa… quería contarte una historia. Nuestra historia.❤️</p>
     <button id="startBtn">Comenzar</button>
   </div>
 
+  <!-- Menú de secciones -->
   <div id="menuSecciones" style="display: none;">
     <button onclick="mostrarSeccion('historia')">📖 Nuestra historia</button>
     <button onclick="mostrarSeccion('videos')">👥 Videos diarios</button>
@@ -20,6 +22,7 @@
     <button onclick="mostrarSeccion('cositas')">💖 Cositas lindas</button>
   </div>
 
+  <!-- Sección: Nuestra historia -->
   <div id="historia" style="display: none;">
     <div id="capitulo-contenido"></div>
     <p id="contadorCapitulo"></p>
@@ -27,6 +30,7 @@
     <button id="siguienteCap">Siguiente</button>
   </div>
 
+  <!-- Sección: Videos diarios -->
   <div id="videos" style="display: none;">
     <h2>Videos diarios</h2>
     <p>
@@ -37,20 +41,27 @@
     <button id="siguienteVideo">Siguiente</button>
   </div>
 
+  <!-- Sección: Canciones -->
   <div id="canciones" style="display: none;">
     <h2>Canciones</h2>
     <p>
       Aquí estarán las canciones que me aprendí para ti 🎶 ❤️ Traté de tocarla lo mejor que podía pero la verdad es que apenas me dio tiempo de trabajar en todo esto ya que realmente he estado muy ocupado pero espero que valores mi esfuerzo, obviamente lo podría tocar mucho mejor pero lo que faltó aquí fue el tiempo ❤️.
     </p>
     <div id="cancion-contenido"></div>
+    <!-- Botón para continuar a la siguiente sección -->
+    <button id="continuarCositas" style="margin-top: 10px;">Continuar con las cositas lindas</button>
   </div>
 
+  <!-- Sección: Cositas lindas -->
   <div id="cositas" style="display: none;">
     <h2>Cositas lindas</h2>
-    <p>Aquí estaré añadiendo todas las cositas lindas para ti: fotos, videos de dedicatorias, frases y más. ❤️</p>
+    <!-- El texto duplicado se elimina; todo se controlará por JS -->
     <div id="cositas-contenido"></div>
+    <button id="anteriorCosita">Anterior</button>
+    <button id="siguienteCosita">Siguiente</button>
   </div>
 
+  <!-- Botón para activar/descactivar música de fondo -->
   <button id="activarSonido">🎶 Activar música</button>
 
   <!-- Fondo de YouTube -->
@@ -58,7 +69,9 @@
     <div id="video-background"></div>
   </div>
 
+  <!-- Librería de YouTube -->
   <script src="https://www.youtube.com/iframe_api"></script>
+  <!-- Tu archivo JavaScript principal -->
   <script src="script.js"></script>
 </body>
 </html>

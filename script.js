@@ -1,4 +1,6 @@
-// --- YouTube Background Music ---
+// ===========================
+//       YOUTUBE BG MUSIC
+// ===========================
 let player;
 let sonidoActivo = false;
 
@@ -37,13 +39,14 @@ document.getElementById('activarSonido').addEventListener('click', () => {
   }
 });
 
-// --- Inicio ---
+// ===========================
+//          INICIO
+// ===========================
 document.getElementById('startBtn').addEventListener('click', () => {
   document.querySelector('.intro').style.display = 'none';
   document.getElementById('menuSecciones').style.display = 'block';
 });
 
-// --- Secciones ---
 function mostrarSeccion(id) {
   const secciones = ['historia', 'videos', 'canciones', 'cositas'];
   secciones.forEach(sec => {
@@ -51,7 +54,9 @@ function mostrarSeccion(id) {
   });
 }
 
-// --- Nuestra historia ---
+// ===========================
+//     NUESTRA HISTORIA
+// ===========================
 const capitulos = [
   {
     texto: "Te conocí cuando apenas era este morrillo. ¿Quién iba a imaginar que a esa edad, todo pndjo, conocería a la persona que marcaría el resto de su efímera vida? Gracias por confiar ciegamente en mí.❤️",
@@ -62,11 +67,11 @@ const capitulos = [
     imagenes: ["imagenes/juntitos1.jpg"]
   },
   {
-    texto: "¿Te acuerdas cuando jugábamos al Royale High? Solo hablábamos, sin hacer mucho, pero en ese lugar nos conocimos más que nunca. Llegaba de la escuela y tú siempre estabas ahí, esperándome. Lista para que hablaramos sobre cualquier cosa :3❤️",
+    texto: "¿Te acuerdas cuando jugábamos al Royale High?... ❤️",
     imagenes: ["imagenes/devorando.jpg"]
   },
   {
-    texto: "Jajaja el día que te tragaste tremendo ntr😹😹👻. Todo actuado obvio, pero qué risa nos dio ese rato JAJA.❤️ (Qué está pasando aqui🗣️🗣️)",
+    texto: "Jajaja el día que te tragaste tremendo ntr😹😹👻. Todo actuado obvio, pero qué risa nos dio ese rato JAJA.❤️",
     imagenes: ["imagenes/ntr.jpg"]
   },
   {
@@ -74,51 +79,51 @@ const capitulos = [
     imagenes: ["imagenes/pedita.jpg"]
   },
   {
-    texto: "Cuando alcancé los 10M en el juego ese de ninjas... tú siempre me apoyaste incondicionalmente, incluso cuando mis metas tardaban años.❤️",
+    texto: "Cuando alcancé los 10M en el juego ese de ninjas... ❤️",
     imagenes: ["imagenes/10mnin.jpg"]
   },
   {
-    texto: "Cuando conseguí el torpedo oguo. Siempre estuviste conmigo en todos mis logros, por más mínimos o absurdos que fueran. Gracias por eso.❤️",
+    texto: "Cuando conseguí el torpedo oguo... ❤️",
     imagenes: ["imagenes/torpedo.jpg"]
   },
   {
-    texto: "Mira esas vibes: niña de casita, tierna, preciosa. Nunca cambiaste, sigues siendo esa bb de siempre.❤️",
+    texto: "Mira esas vibes: niña de casita, tierna, preciosa... ❤️",
     imagenes: ["imagenes/ali1.jpg", "imagenes/ali2.jpg", "imagenes/ali3.jpg"]
   },
   {
-    texto: "“Te amo pero como amics” — así empezó todo. Me rechazaste, pero aún así el amor se nos escapaba en cada palabra.❤️",
+    texto: "“Te amo pero como amics” — así empezó todo... ❤️",
     imagenes: ["imagenes/teamoamics.jpg"]
   },
   {
-    texto: "Cuando por fin te quitaste los filtros... me enamoré más. Tus lentes, tu boquita, tus ojitos, tus cejas... simplemente tú.❤️",
+    texto: "Cuando por fin te quitaste los filtros... ❤️",
     imagenes: ["imagenes/novia1.jpg", "imagenes/novia2.jpg"]
   },
   {
-    texto: "Recuerdo nuestra casita en Minecraft. Tú construías palacios mientras yo me perdía en las minas. Teníamos hasta nuestros hijitos virtuales.❤️",
+    texto: "Recuerdo nuestra casita en Minecraft... ❤️",
     imagenes: ["imagenes/minecraft.jpg", "imagenes/ropa1.jpg", "imagenes/ropa2.jpg"]
   },
   {
-    texto: "El día del paro en el Tec. Me apoyaste aunque al inicio no estabas de acuerdo. Siempre estuviste para mí, incluso en mis locuras.❤️",
+    texto: "El día del paro en el Tec... ❤️",
     imagenes: ["imagenes/paro.jpg"]
   },
   {
-    texto: "¿Te acuerdas de esto? Solo tú me pedirías algo así, y solo yo te lo mandaría con tanto amor. Nadie más haría eso por ti 😂 También ese día mojaste la cama xdd. Pero fuera de eso... eras tan tú, tan linda, tan sensual y tan mía. También amo esa parte tuya.❤️",
+    texto: "¿Te acuerdas de esto? Solo tú me pedirías algo así, y solo yo te lo mandaría... ❤️",
     imagenes: ["imagenes/mecorazon.jpg", "imagenes/mojada.jpg"]
   },
   {
-    texto: "Tus dibujos siempre me hacían sentir mal por los contrastes a los q te mandaba yo xdd. Aun así, los guardaba como tesoros. Me hacías sentir especial.❤️",
+    texto: "Tus dibujos siempre me hacían sentir mal por los contrastes... ❤️",
     imagenes: ["imagenes/noteit.jpg"]
   },
   {
-    texto: "Tus ttas eran arte JAJA. Pero más allá de eso, ver cómo me mirabas mientras las mostrabas... eso me volvía loco.❤️",
+    texto: "Tus ttas eran arte JAJA. Pero más allá de eso... ❤️",
     imagenes: ["imagenes/tetas.jpg"]
   },
   {
-    texto: "No importa el tiempo que pase, ni las vueltas que de la vida, ni la respuesta que me des hoy o mañana... Yo siempre estaré para ti, apoyándote en cada cosa que emprendas. Me encanta que sigas evolucionando como mujer y como persona, cada día aprendiendo algo nuevo y queriéndote superar más y más, incluso si parte del proceso es ya no tenerte a mi lado, lo entenderé y pues te desearé siempre lo mejor❤️. Oye por cierto... ¿Por qué aún con cada día que pasa, sigues poniéndote más hermosa que el anterior?❤️",
+    texto: "No importa el tiempo que pase... Oye por cierto... ❤️",
     imagenes: ["imagenes/alinueva1.jpg", "imagenes/alinueva2.jpg", "imagenes/alinueva3.jpg", "imagenes/alinueva4.jpg"]
   },
   {
-    texto: "Al menos aquí... sí pudimos estar juntos. Quizá en esta realidad dibujada por mis recuerdos, los dos nos encontramos como siempre soñé: frente a frente, con el tiempo detenido y sin miedo a perdernos. Aunque sea en una imagen inventada, eres tú. Siempre has sido tú. Y si pudiera pedirle algo al destino, sería que un día, esa escena deje de ser imaginación… y se convierta en nuestra realidad. Porque yo aún quiero vivirla contigo.❤️",
+    texto: "Al menos aquí... sí pudimos estar juntos. Quizá en esta realidad dibujada... ❤️",
     imagenes: ["imagenes/nostalgia.jpg"]
   }
 ];
@@ -143,13 +148,23 @@ function mostrarCapitulo(index) {
 
   document.getElementById("contadorCapitulo").innerText = `Capítulo ${index + 1}/${totalCaps}`;
   contenido.classList.remove("fade");
-  void contenido.offsetWidth;
+  void contenido.offsetWidth; // forzar repaint
   contenido.classList.add("fade");
 
-  document.getElementById("anteriorCap").disabled = index === 0;
-  document.getElementById("siguienteCap").disabled = index === totalCaps - 1;
+  // Botón Anterior
+  document.getElementById("anteriorCap").disabled = (index === 0);
+
+  // Si es el último capítulo, cambiamos el texto del botón y habilitamos su acción para saltar a videos
+  if (index === totalCaps - 1) {
+    document.getElementById("siguienteCap").innerText = "Continuar con los videos diarios";
+    document.getElementById("siguienteCap").disabled = false;
+  } else {
+    document.getElementById("siguienteCap").innerText = "Siguiente";
+    document.getElementById("siguienteCap").disabled = false;
+  }
 }
 
+// Eventos para los botones de Historia
 document.getElementById("anteriorCap").addEventListener("click", () => {
   if (capActual > 0) {
     capActual--;
@@ -161,6 +176,11 @@ document.getElementById("siguienteCap").addEventListener("click", () => {
   if (capActual < totalCaps - 1) {
     capActual++;
     mostrarCapitulo(capActual);
+  } else {
+    // Si ya es el último capítulo, nos vamos a "videos"
+    mostrarSeccion('videos');
+    videoActual = 0;
+    mostrarVideoDiario(videoActual);
   }
 });
 
@@ -169,8 +189,9 @@ document.querySelector("[onclick=\"mostrarSeccion('historia')\"]").addEventListe
   mostrarCapitulo(capActual);
 });
 
-// --- Videos diarios ---
-// 👇 Aquí puedes seguir añadiendo videos nuevos en orden cronológico
+// ===========================
+//      VIDEOS DIARIOS
+// ===========================
 const videosDiarios = [
   { fecha: "1 de marzo", enlace: "https://youtu.be/U68D7p7x19c" },
   { fecha: "2 de marzo", enlace: "https://youtu.be/GFQP1yHPR1U" },
@@ -210,8 +231,14 @@ function mostrarVideoDiario(index) {
   iframe.style.height = "400px";
   contenedor.appendChild(iframe);
 
-  document.getElementById("anteriorVideo").disabled = index === 0;
-  document.getElementById("siguienteVideo").disabled = index === videosDiarios.length - 1;
+  // Botones
+  document.getElementById("anteriorVideo").disabled = (index === 0);
+
+  if (index === videosDiarios.length - 1) {
+    document.getElementById("siguienteVideo").innerText = "Continuar con las canciones";
+  } else {
+    document.getElementById("siguienteVideo").innerText = "Siguiente";
+  }
 }
 
 document.getElementById("anteriorVideo").addEventListener("click", () => {
@@ -225,6 +252,10 @@ document.getElementById("siguienteVideo").addEventListener("click", () => {
   if (videoActual < videosDiarios.length - 1) {
     videoActual++;
     mostrarVideoDiario(videoActual);
+  } else {
+    // Último video => pasar a Canciones
+    mostrarSeccion('canciones');
+    cargarCancion();
   }
 });
 
@@ -233,7 +264,9 @@ document.querySelector("[onclick=\"mostrarSeccion('videos')\"]").addEventListene
   mostrarVideoDiario(videoActual);
 });
 
-// --- Canciones ---
+// ===========================
+//         CANCIONES
+// ===========================
 function cargarCancion() {
   const contenedor = document.getElementById("cancion-contenido");
   contenedor.innerHTML = "";
@@ -252,20 +285,136 @@ function cargarCancion() {
   contenedor.appendChild(iframe);
 }
 
-document.querySelector("[onclick=\"mostrarSeccion('canciones')\"]").addEventListener("click", () => {
-  cargarCancion();
+// Botón “Continuar con cositas lindas” en Canciones
+document.getElementById("continuarCositas").addEventListener("click", () => {
+  mostrarSeccion("cositas");
+  cositaActual = 0;
+  mostrarCosita(cositaActual);
 });
 
-// --- Cositas lindas ---
-function cargarCositasLindas() {
+// ===========================
+//      COSITAS LINDAS
+// ===========================
+/*
+  Orden deseado:
+  1) Texto + img "calaquitas"
+  2) img ["uno","dos","tres"]
+  3) video1
+  4) video2
+  5) video3
+  6) Texto final súper romántico
+*/
+
+const cositasData = [
+  {
+    type: "images",
+    text: "Aquí estaré añadiendo todas las cositas lindas para ti: fotos, videos de dedicatorias, frases y más. ❤️",
+    images: ["frases/calaquitas.jpg"]
+  },
+  {
+    type: "images",
+    images: ["frases/uno.jpg", "frases/dos.jpg", "frases/tres.jpg"]
+  },
+  {
+    type: "video",
+    youtubeId: "LyDevjFr5fE" // rezandopaqueregreses
+  },
+  {
+    type: "video",
+    youtubeId: "JLOUxj9kuwU" // enotrouniverso
+  },
+  {
+    type: "video",
+    youtubeId: "W9GY6RV_Vbg" // dedicatorias
+  },
+  {
+    type: "final",
+    text: `
+      ❤️ 17/04/2025 ❤️
+
+      Mi amada Alisson:
+
+      Hemos llegado al final de esta pequeña gran sorpresa. Antes que nada, quiero agradecerte por existir en mi vida y por cada sonrisa que me has regalado. También quiero pedirte perdón por todos mis errores, por las veces en que mis acciones o mis palabras te lastimaron y, sobre todo, por no haberte cuidado como merecías.
+
+      Hoy, en nuestro aniversario, quiero que sepas que mi corazón sigue atado al tuyo. Si de verdad estás segura de que no sientes nada ya por mí, entiendo tu decisión y la respeto. Pero si en algún momento, durante este recorrido, sentiste una pizca de ese amor que antes nos unía, para mí es la prueba de que nuestro amor persiste. Te quiero recuperar a como dé lugar, pero también sabré esperar lo que haga falta, porque confío en que lo que vivimos no fue en vano.
+
+      Te deseo lo mejor, aunque sea lejos de mí. Sin embargo, no negaré que mi ilusión sigue siendo que un día nos reencontremos y volvamos a sonreír juntos. Perdón por mis estupideces, por las veces en que te incomodé o te hice enojar. Me arrepiento de haber arruinado algo tan bello que teníamos, y aunque me digas que no, yo seguiré confiando en que nuestro amor fue (y es) real.
+
+      Gracias por cada momento que compartiste conmigo, por tu dulzura, por tu alegría, por tu manera de ver la vida y hacerme sentir tan especial. Pase lo que pase, siempre tendrás un pedazo de mi corazón.
+
+      Con todo mi amor y esperando que algún día volvamos a coincidir,
+      Diego Yorel Castelán Silva ❤️
+    `
+  }
+];
+
+let cositaActual = 0;
+
+function mostrarCosita(index) {
   const contenedor = document.getElementById("cositas-contenido");
   contenedor.innerHTML = "";
+  
+  const data = cositasData[index];
 
-  const mensaje = document.createElement("p");
-  mensaje.innerText = "Aquí estaré añadiendo todas las cositas lindas para ti: fotos, videos de dedicatorias, frases y más. ❤️";
-  contenedor.appendChild(mensaje);
+  // Si hay texto, lo ponemos
+  if (data.text) {
+    const p = document.createElement("p");
+    p.innerText = data.text.trim();
+    contenedor.appendChild(p);
+  }
+
+  // Dependiendo del type
+  if (data.type === "images") {
+    data.images.forEach(src => {
+      const img = document.createElement("img");
+      img.src = src;
+      contenedor.appendChild(img);
+    });
+  } else if (data.type === "video") {
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube.com/embed/${data.youtubeId}`;
+    iframe.frameBorder = "0";
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allowFullscreen = true;
+    iframe.style.width = "100%";
+    iframe.style.height = "400px";
+    contenedor.appendChild(iframe);
+  } else if (data.type === "final") {
+    // Ya arriba pusimos el texto, aquí podríamos estilizar más si queremos
+  }
+
+  // Animación fade
+  contenedor.classList.remove("fade");
+  void contenedor.offsetWidth;
+  contenedor.classList.add("fade");
+
+  // Actualizamos botones
+  document.getElementById("anteriorCosita").disabled = (index === 0);
+
+  const btnSiguiente = document.getElementById("siguienteCosita");
+  if (index === cositasData.length - 1) {
+    btnSiguiente.innerText = "Volver al menú";
+    btnSiguiente.onclick = () => {
+      mostrarSeccion('menuSecciones');
+    };
+  } else {
+    btnSiguiente.innerText = "Siguiente";
+    btnSiguiente.onclick = () => {
+      cositaActual++;
+      mostrarCosita(cositaActual);
+    };
+  }
 }
 
+// Botones de Cositas
+document.getElementById("anteriorCosita").addEventListener("click", () => {
+  if (cositaActual > 0) {
+    cositaActual--;
+    mostrarCosita(cositaActual);
+  }
+});
+
 document.querySelector("[onclick=\"mostrarSeccion('cositas')\"]").addEventListener("click", () => {
-  cargarCositasLindas();
+  cositaActual = 0;
+  mostrarCosita(cositaActual);
 });
