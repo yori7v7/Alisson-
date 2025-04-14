@@ -1,3 +1,4 @@
+// --- YouTube Background Music ---
 let player;
 let sonidoActivo = false;
 
@@ -10,6 +11,7 @@ function onYouTubeIframeAPIReady() {
       playlist: 'pbhs9gFLp1Q',
       controls: 0,
       mute: 1,
+      enablejsapi: 1,
       showinfo: 0,
       modestbranding: 1,
       rel: 0
@@ -21,7 +23,7 @@ function onYouTubeIframeAPIReady() {
 }
 
 document.getElementById('activarSonido').addEventListener('click', () => {
-  if (player) {
+  if (player && player.unMute) {
     if (!sonidoActivo) {
       player.unMute();
       player.setVolume(8);
@@ -35,11 +37,13 @@ document.getElementById('activarSonido').addEventListener('click', () => {
   }
 });
 
+// --- Inicio ---
 document.getElementById('startBtn').addEventListener('click', () => {
   document.querySelector('.intro').style.display = 'none';
   document.getElementById('menuSecciones').style.display = 'block';
 });
 
+// --- Secciones ---
 function mostrarSeccion(id) {
   const secciones = ['historia', 'videos', 'canciones', 'cositas'];
   secciones.forEach(sec => {
@@ -142,11 +146,8 @@ function mostrarCapitulo(index) {
   void contenido.offsetWidth;
   contenido.classList.add("fade");
 
-  const btnAnterior = document.getElementById("anteriorCap");
-  const btnSiguiente = document.getElementById("siguienteCap");
-
-  btnAnterior.disabled = index === 0;
-  btnSiguiente.disabled = index === totalCaps - 1;
+  document.getElementById("anteriorCap").disabled = index === 0;
+  document.getElementById("siguienteCap").disabled = index === totalCaps - 1;
 }
 
 document.getElementById("anteriorCap").addEventListener("click", () => {
@@ -169,6 +170,7 @@ document.querySelector("[onclick=\"mostrarSeccion('historia')\"]").addEventListe
 });
 
 // --- Videos diarios ---
+// 👇 Aquí puedes seguir añadiendo videos nuevos en orden cronológico
 const videosDiarios = [
   { fecha: "1 de marzo", enlace: "https://youtu.be/U68D7p7x19c" },
   { fecha: "2 de marzo", enlace: "https://youtu.be/GFQP1yHPR1U" },
@@ -178,11 +180,11 @@ const videosDiarios = [
   { fecha: "6 de marzo", enlace: "https://youtu.be/JCqYZCWD4RY" },
   { fecha: "7 de marzo", enlace: "https://youtu.be/jb29tN7Tjyw" },
   { fecha: "8 de marzo", enlace: "https://youtu.be/Mv3jDd73jBQ" },
-  { fecha: "9 de marzo", enlace: "https://youtube.com/shorts/IcBFqiy8P_w?feature=share" },
+  { fecha: "9 de marzo", enlace: "https://youtu.be/IcBFqiy8P_w" },
   { fecha: "10 de marzo", enlace: "https://youtu.be/m52ENaXsaaA" },
   { fecha: "15 de marzo", enlace: "https://youtu.be/U0fiA0oyBHk" },
-  { fecha: "26 de marzo", enlace: "https://youtube.com/shorts/2FTJ2H4J-VI?feature=share" },
-  { fecha: "28 de marzo", enlace: "https://youtube.com/shorts/i7qoVELfEh4?feature=share" },
+  { fecha: "26 de marzo", enlace: "https://youtu.be/2FTJ2H4J-VI" },
+  { fecha: "28 de marzo", enlace: "https://youtu.be/i7qoVELfEh4" },
   { fecha: "5 de abril", enlace: "https://youtu.be/4L3BmmLbJ04" },
   { fecha: "6 de abril", enlace: "https://youtu.be/ZMnjbt3ynVI" },
   { fecha: "13 de abril", enlace: "https://youtu.be/PXHrS78O7OQ" }
@@ -199,7 +201,8 @@ function mostrarVideoDiario(index) {
   contenedor.appendChild(titulo);
 
   const iframe = document.createElement("iframe");
-  iframe.src = videosDiarios[index].enlace.replace("/watch?v=", "/embed/").replace("/shorts/", "/embed/");
+  const videoId = videosDiarios[index].enlace.split('/').pop().split('?')[0];
+  iframe.src = `https://www.youtube.com/embed/${videoId}`;
   iframe.frameBorder = "0";
   iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
   iframe.allowFullscreen = true;
@@ -207,11 +210,8 @@ function mostrarVideoDiario(index) {
   iframe.style.height = "400px";
   contenedor.appendChild(iframe);
 
-  const btnAnteriorVideo = document.getElementById("anteriorVideo");
-  const btnSiguienteVideo = document.getElementById("siguienteVideo");
-
-  btnAnteriorVideo.disabled = index === 0;
-  btnSiguienteVideo.disabled = index === videosDiarios.length - 1;
+  document.getElementById("anteriorVideo").disabled = index === 0;
+  document.getElementById("siguienteVideo").disabled = index === videosDiarios.length - 1;
 }
 
 document.getElementById("anteriorVideo").addEventListener("click", () => {
@@ -233,7 +233,7 @@ document.querySelector("[onclick=\"mostrarSeccion('videos')\"]").addEventListene
   mostrarVideoDiario(videoActual);
 });
 
-// --- Sección de canciones ---
+// --- Canciones ---
 function cargarCancion() {
   const contenedor = document.getElementById("cancion-contenido");
   contenedor.innerHTML = "";
@@ -256,7 +256,7 @@ document.querySelector("[onclick=\"mostrarSeccion('canciones')\"]").addEventList
   cargarCancion();
 });
 
-// --- Sección "Cositas lindas" (vacía de momento) ---
+// --- Cositas lindas ---
 function cargarCositasLindas() {
   const contenedor = document.getElementById("cositas-contenido");
   contenedor.innerHTML = "";
@@ -269,4 +269,3 @@ function cargarCositasLindas() {
 document.querySelector("[onclick=\"mostrarSeccion('cositas')\"]").addEventListener("click", () => {
   cargarCositasLindas();
 });
-
