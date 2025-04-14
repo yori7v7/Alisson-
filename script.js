@@ -57,73 +57,74 @@ function mostrarSeccion(id) {
 // ===========================
 //     NUESTRA HISTORIA
 // ===========================
+// Actualizamos los textos según lo solicitado.
 const capitulos = [
   {
-    texto: "Te conocí cuando apenas era este morrillo. ¿Quién iba a imaginar que a esa edad, todo pndjo, conocería a la persona que marcaría el resto de su efímera vida? Gracias por confiar ciegamente en mí.❤️",
+    texto: "Te conocí cuando apenas era este morrillo. ¿Quién iba a imaginar que a esa edad, todo pndjo, conocería a la persona que marcaría el resto de su efímera vida? Gracias por confiar ciegamente en mí. ❤️",
     imagenes: ["imagenes/yorisecu.jpg", "imagenes/yorisecu2.jpg"]
   },
   {
-    texto: "Todo comenzó un 17 de agosto del 2018... en Roblox. Había conocido a Val y weno ya sabes q pasó xd, pero sin saberlo, ese día también conocí a la persona que marcaría mi vida para siempre: Tú.❤️",
+    texto: "Todo comenzó un 17 de agosto del 2018... en Roblox. Había conocido a Val y weno ya sabes qué pasó xd, pero sin saberlo, ese día también conocí a la persona que marcaría mi vida para siempre: Tú. ❤️",
     imagenes: ["imagenes/juntitos1.jpg"]
   },
   {
-    texto: "¿Te acuerdas cuando jugábamos al Royale High?... ❤️",
+    texto: "¿Te acuerdas cuando jugábamos al Royale High? Solo hablábamos, sin hacer mucho, pero en ese lugar nos conocimos más que nunca. Llegaba de la escuela y tú siempre estabas ahí, esperándome. Lista para que habláramos sobre cualquier cosa :3 ❤️",
     imagenes: ["imagenes/devorando.jpg"]
   },
   {
-    texto: "Jajaja el día que te tragaste tremendo ntr😹😹👻. Todo actuado obvio, pero qué risa nos dio ese rato JAJA.❤️",
+    texto: "Jajaja el día que te tragaste tremendo ntr 😹😹👻. Todo actuado obvio, pero qué risa nos dio ese rato JAJA. ❤️ (Qué está pasando aquí 🗣️🗣️)",
     imagenes: ["imagenes/ntr.jpg"]
   },
   {
-    texto: "Eras tan random y tan tú. Gracias por todos esos momentos raros pero únicos.❤️",
+    texto: "Eras tan random y tan tú. Gracias por todos esos momentos raros pero únicos. ❤️",
     imagenes: ["imagenes/pedita.jpg"]
   },
   {
-    texto: "Cuando alcancé los 10M en el juego ese de ninjas... ❤️",
+    texto: "Cuando alcancé los 10M en el juego ese de ninjas... tú siempre me apoyaste incondicionalmente, incluso cuando mis metas tardaban años. ❤️",
     imagenes: ["imagenes/10mnin.jpg"]
   },
   {
-    texto: "Cuando conseguí el torpedo oguo... ❤️",
+    texto: "Cuando conseguí el torpedo oguo. Siempre estuviste conmigo en todos mis logros, por más mínimos o absurdos que fueran. Gracias por eso. ❤️",
     imagenes: ["imagenes/torpedo.jpg"]
   },
   {
-    texto: "Mira esas vibes: niña de casita, tierna, preciosa... ❤️",
+    texto: "Mira esas vibes: niña de casita, tierna, preciosa. Nunca cambiaste, sigues siendo esa bb de siempre. ❤️",
     imagenes: ["imagenes/ali1.jpg", "imagenes/ali2.jpg", "imagenes/ali3.jpg"]
   },
   {
-    texto: "“Te amo pero como amics” — así empezó todo... ❤️",
+    texto: "“Te amo pero como amics” — así empezó todo. Me rechazaste, pero aún así el amor se nos escapaba en cada palabra. ❤️",
     imagenes: ["imagenes/teamoamics.jpg"]
   },
   {
-    texto: "Cuando por fin te quitaste los filtros... ❤️",
+    texto: "Cuando por fin te quitaste los filtros... me enamoré más. Tus lentes, tu boquita, tus ojitos, tus cejas... simplemente tú. ❤️",
     imagenes: ["imagenes/novia1.jpg", "imagenes/novia2.jpg"]
   },
   {
-    texto: "Recuerdo nuestra casita en Minecraft... ❤️",
+    texto: "Recuerdo nuestra casita en Minecraft. Tú construías palacios mientras yo me perdía en las minas. Teníamos hasta nuestros hijitos virtuales. ❤️",
     imagenes: ["imagenes/minecraft.jpg", "imagenes/ropa1.jpg", "imagenes/ropa2.jpg"]
   },
   {
-    texto: "El día del paro en el Tec... ❤️",
+    texto: "El día del paro en el Tec. Me apoyaste aunque al inicio no estabas de acuerdo. Siempre estuviste para mí, incluso en mis locuras. ❤️",
     imagenes: ["imagenes/paro.jpg"]
   },
   {
-    texto: "¿Te acuerdas de esto? Solo tú me pedirías algo así, y solo yo te lo mandaría... ❤️",
+    texto: "¿Te acuerdas de esto? Solo tú me pedirías algo así, y solo yo te lo mandaría con tanto amor. Nadie más haría eso por ti. También ese día mojaste la cama xdd. Pero fuera de eso... eras tan tú, tan linda, tan sensual y tan mía. También amo esa parte tuya. ❤️",
     imagenes: ["imagenes/mecorazon.jpg", "imagenes/mojada.jpg"]
   },
   {
-    texto: "Tus dibujos siempre me hacían sentir mal por los contrastes... ❤️",
+    texto: "Tus dibujos siempre me hacían sentir mal por los contrastes a los que te mandaba yo xdd. Aun así, los guardaba como tesoros. Me hacías sentir especial. ❤️",
     imagenes: ["imagenes/noteit.jpg"]
   },
   {
-    texto: "Tus ttas eran arte JAJA. Pero más allá de eso... ❤️",
+    texto: "Tus ttas eran arte JAJA. Pero más allá de eso, ver cómo me mirabas mientras las mostrabas... eso me volvía loco. ❤️",
     imagenes: ["imagenes/tetas.jpg"]
   },
   {
-    texto: "No importa el tiempo que pase... Oye por cierto... ❤️",
+    texto: "No importa el tiempo que pase, ni las vueltas que dé la vida, ni la respuesta que me des hoy o mañana... Yo siempre estaré para ti, apoyándote en cada cosa que emprendas. Me encanta que sigas evolucionando como mujer y como persona, cada día aprendiendo algo nuevo y queriéndote superar más y más, incluso si parte del proceso es ya no tenerte a mi lado, lo entenderé y te desearé siempre lo mejor ❤️. Oye por cierto... ¿Por qué aún con cada día que pasa, sigues poniéndote más hermosa que el anterior? ❤️",
     imagenes: ["imagenes/alinueva1.jpg", "imagenes/alinueva2.jpg", "imagenes/alinueva3.jpg", "imagenes/alinueva4.jpg"]
   },
   {
-    texto: "Al menos aquí... sí pudimos estar juntos. Quizá en esta realidad dibujada... ❤️",
+    texto: "Al menos aquí... sí pudimos estar juntos. Quizá en esta realidad dibujada por mis recuerdos, los dos nos encontramos como siempre soñé: frente a frente, con el tiempo detenido y sin miedo a perdernos. Aunque sea en una imagen inventada, eres tú. Siempre has sido tú. Y si pudiera pedirle algo al destino, sería que un día, esa escena deje de ser imaginación… y se convierta en nuestra realidad. Porque yo aún quiero vivirla contigo. ❤️",
     imagenes: ["imagenes/nostalgia.jpg"]
   }
 ];
@@ -151,10 +152,9 @@ function mostrarCapitulo(index) {
   void contenido.offsetWidth; // forzar repaint
   contenido.classList.add("fade");
 
-  // Botón Anterior
   document.getElementById("anteriorCap").disabled = (index === 0);
 
-  // Si es el último capítulo, cambiamos el texto del botón y habilitamos su acción para saltar a videos
+  // Si es el último capítulo, cambiamos el texto del botón para pasar a la siguiente sección
   if (index === totalCaps - 1) {
     document.getElementById("siguienteCap").innerText = "Continuar con los videos diarios";
     document.getElementById("siguienteCap").disabled = false;
@@ -164,7 +164,6 @@ function mostrarCapitulo(index) {
   }
 }
 
-// Eventos para los botones de Historia
 document.getElementById("anteriorCap").addEventListener("click", () => {
   if (capActual > 0) {
     capActual--;
@@ -177,7 +176,7 @@ document.getElementById("siguienteCap").addEventListener("click", () => {
     capActual++;
     mostrarCapitulo(capActual);
   } else {
-    // Si ya es el último capítulo, nos vamos a "videos"
+    // Último capítulo: pasar a Videos diarios
     mostrarSeccion('videos');
     videoActual = 0;
     mostrarVideoDiario(videoActual);
@@ -231,9 +230,7 @@ function mostrarVideoDiario(index) {
   iframe.style.height = "400px";
   contenedor.appendChild(iframe);
 
-  // Botones
   document.getElementById("anteriorVideo").disabled = (index === 0);
-
   if (index === videosDiarios.length - 1) {
     document.getElementById("siguienteVideo").innerText = "Continuar con las canciones";
   } else {
@@ -253,7 +250,7 @@ document.getElementById("siguienteVideo").addEventListener("click", () => {
     videoActual++;
     mostrarVideoDiario(videoActual);
   } else {
-    // Último video => pasar a Canciones
+    // Último video: pasar a Canciones
     mostrarSeccion('canciones');
     cargarCancion();
   }
@@ -285,7 +282,6 @@ function cargarCancion() {
   contenedor.appendChild(iframe);
 }
 
-// Botón “Continuar con cositas lindas” en Canciones
 document.getElementById("continuarCositas").addEventListener("click", () => {
   mostrarSeccion("cositas");
   cositaActual = 0;
@@ -297,14 +293,13 @@ document.getElementById("continuarCositas").addEventListener("click", () => {
 // ===========================
 /*
   Orden deseado:
-  1) Texto + img "calaquitas"
-  2) img ["uno","dos","tres"]
-  3) video1
-  4) video2
-  5) video3
-  6) Texto final súper romántico
+    1) Texto + img "calaquitas"
+    2) Imágenes: "uno", "dos", "tres"
+    3) Video 1
+    4) Video 2
+    5) Video 3
+    6) Texto final súper romántico
 */
-
 const cositasData = [
   {
     type: "images",
@@ -356,14 +351,12 @@ function mostrarCosita(index) {
   
   const data = cositasData[index];
 
-  // Si hay texto, lo ponemos
   if (data.text) {
     const p = document.createElement("p");
     p.innerText = data.text.trim();
     contenedor.appendChild(p);
   }
-
-  // Dependiendo del type
+  
   if (data.type === "images") {
     data.images.forEach(src => {
       const img = document.createElement("img");
@@ -379,16 +372,13 @@ function mostrarCosita(index) {
     iframe.style.width = "100%";
     iframe.style.height = "400px";
     contenedor.appendChild(iframe);
-  } else if (data.type === "final") {
-    // Ya arriba pusimos el texto, aquí podríamos estilizar más si queremos
   }
+  // En el caso de "final", el texto ya se añadió
 
-  // Animación fade
   contenedor.classList.remove("fade");
   void contenedor.offsetWidth;
   contenedor.classList.add("fade");
 
-  // Actualizamos botones
   document.getElementById("anteriorCosita").disabled = (index === 0);
 
   const btnSiguiente = document.getElementById("siguienteCosita");
@@ -406,7 +396,6 @@ function mostrarCosita(index) {
   }
 }
 
-// Botones de Cositas
 document.getElementById("anteriorCosita").addEventListener("click", () => {
   if (cositaActual > 0) {
     cositaActual--;
