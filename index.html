@@ -1,0 +1,72 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alitas❤️</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="intro">
+    <h1>Alisson Andrea Huerta Mejía 👉👈❤️</h1>
+    <p>Antes de decir cualquier cosa... quería contarte una historia. Nuestra historia.❤️</p>
+    <button id="startBtn">Comenzar</button>
+  </div>
+
+  <div id="menuSecciones" style="display: none;">
+    <button onclick="mostrarSeccion('historia')">📖 Nuestra historia</button>
+    <button onclick="mostrarSeccion('videos')">👥 Videos diarios</button>
+    <button onclick="mostrarSeccion('canciones')">🎶 Canciones</button>
+    <button onclick="mostrarSeccion('cositas')">💖 Cositas lindas</button>
+  </div>
+
+  <div id="historia" style="display: none;">
+    <div class="historia-container">
+      <h2>Nuestra historia en 17 recuerdos 🥹</h2>
+      <div id="contadorCapitulo"></div>
+      <div id="capitulo-contenido"></div>
+      <div class="navegacion">
+        <button id="anteriorCap">Anterior</button>
+        <button id="siguienteCap">Siguiente</button>
+      </div>
+      <div id="propuestaFinal" style="display: none;">
+        <p>¿Preparada para la siguiente parte? 😊</p>
+        <button onclick="mostrarSeccion('videos')">Continuar con videos diarios</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="videos" style="display: none;">
+    <h2>Videos diarios</h2>
+    <p>Aquí estarán todos los videos que fui grabando día a día. Solo decidí poner los más relevantes o donde siento que hablo más sin repetirme tanto jaja, por si ves mucha diferencia entre las fechas, básicamente estos videos son de mi día a día pero como no quiero incomodarte o molestarte llenándote de llamadas y mensajes pues entonces mejor decidí grabarme expresando lo que sentía en el día con día, contándote cosas y tal. Espero no te aburra mucho, quité varios y no puse todos porque si no sí serían muchos JAJA. Es algo que una vez me pediste que hiciera y nunca lo hice y pues bueno, lamentablemente te entrego esto tarde pero mejor tarde que nunca. Te amo ❤️</p>
+    <div id="videoDia-contenido"></div>
+    <div class="navegacion">
+      <button id="anteriorVideo">Anterior</button>
+      <button id="siguienteVideo">Siguiente</button>
+    </div>
+  </div>
+
+  <div id="canciones" style="display: none;">
+    <h2>Canciones</h2>
+    <p>Aquí estarán las canciones que me aprendí para ti 🎶 ❤️ Traté de tocarla lo mejor que podía pero la verdad es que apenas me dió tiempo de trabajar en todo esto ya que realmente he estado muy ocupado pero espero que valores mi esfuerzo, obviamente lo podría tocar mucho mejor pero lo que faltó aquí fue el tiempo ❤️.</p>
+    <h3>Sorry, I Love You - Stray Kids</h3>
+    <div>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/hIacHcQUK7k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div id="cositas" style="display: none;">
+    <h2>Cositas lindas</h2>
+    <p>Un pequeño rincón para dedicarte fotos, frases, videos, y pequeños detalles que siempre quise recordarte.❤️</p>
+  </div>
+
+  <div id="video-background">
+    <iframe id="player" src="https://www.youtube.com/embed/pbhs9gFLp1Q?autoplay=1&mute=1&controls=0&loop=1&playlist=pbhs9gFLp1Q&modestbranding=1&showinfo=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+
+  <button id="activarSonido">🎶 Activar música</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
