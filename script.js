@@ -1,12 +1,12 @@
-// ===========================
-//       YOUTUBE BG MUSIC
-// ===========================
+// ==================================================
+//        YOUTUBE BACKGROUND MUSIC (Música de fondo)
+// ==================================================
 let player;
 let sonidoActivo = false;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('video-background', {
-    videoId: 'pbhs9gFLp1Q',
+    videoId: 'pbhs9gFLp1Q',  // Tu ID de video de fondo
     playerVars: {
       autoplay: 1,
       loop: 1,
@@ -39,25 +39,43 @@ document.getElementById('activarSonido').addEventListener('click', () => {
   }
 });
 
-// ===========================
-//          INICIO
-// ===========================
-document.getElementById('startBtn').addEventListener('click', () => {
-  document.querySelector('.intro').style.display = 'none';
-  document.getElementById('menuSecciones').style.display = 'block';
-});
+// ==================================================
+//          INTRO (Video + texto inicial)
+// ==================================================
+function cargarIntroVideo() {
+  const introContainer = document.getElementById("introVideoContainer");
+  introContainer.innerHTML = "";
 
-function mostrarSeccion(id) {
-  const secciones = ['historia', 'videos', 'canciones', 'cositas'];
-  secciones.forEach(sec => {
-    document.getElementById(sec).style.display = (sec === id) ? 'block' : 'none';
-  });
+  // Reemplaza 'PLACEHOLDER_VIDEO_ID' con el ID real
+  // cuando tengas el link de YouTube para la introducción.
+  const iframe = document.createElement("iframe");
+  iframe.src = "https://www.youtube.com/embed/PLACEHOLDER_VIDEO_ID";
+  iframe.frameBorder = "0";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+  iframe.allowFullscreen = true;
+  iframe.style.width = "100%";
+  iframe.style.height = "400px";
+
+  introContainer.appendChild(iframe);
 }
 
-// ===========================
+// Cargar el video de intro apenas abra la página
+cargarIntroVideo();
+
+// Botón para continuar con la historia
+document.getElementById("continuarHistoriaBtn").addEventListener("click", () => {
+  // Ocultamos intro, mostramos historia
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("historia").style.display = "block";
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  capActual = 0;
+  mostrarCapitulo(capActual);
+});
+
+// ==================================================
 //     NUESTRA HISTORIA
-// ===========================
-// Actualizamos los textos según lo solicitado.
+// ==================================================
 const capitulos = [
   {
     texto: "Te conocí cuando apenas era este morrillo. ¿Quién iba a imaginar que a esa edad, todo pndjo, conocería a la persona que marcaría el resto de su efímera vida? Gracias por confiar ciegamente en mí. ❤️",
@@ -154,20 +172,19 @@ function mostrarCapitulo(index) {
 
   document.getElementById("anteriorCap").disabled = (index === 0);
 
-  // Si es el último capítulo, cambiamos el texto del botón para pasar a la siguiente sección
   if (index === totalCaps - 1) {
-    document.getElementById("siguienteCap").innerText = "Continuar con los videos diarios";
-    document.getElementById("siguienteCap").disabled = false;
+    document.getElementById("siguienteCap").innerText = "👥 Continuar con videos diarios";
   } else {
     document.getElementById("siguienteCap").innerText = "Siguiente";
-    document.getElementById("siguienteCap").disabled = false;
   }
 }
 
+// Botones "Anterior" y "Siguiente" de Historia
 document.getElementById("anteriorCap").addEventListener("click", () => {
   if (capActual > 0) {
     capActual--;
     mostrarCapitulo(capActual);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 });
 
@@ -175,22 +192,28 @@ document.getElementById("siguienteCap").addEventListener("click", () => {
   if (capActual < totalCaps - 1) {
     capActual++;
     mostrarCapitulo(capActual);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
-    // Último capítulo: pasar a Videos diarios
-    mostrarSeccion('videos');
+    // Último capítulo => pasar a Videos diarios
+    document.getElementById("historia").style.display = "none";
+    document.getElementById("videos").style.display = "block";
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     videoActual = 0;
     mostrarVideoDiario(videoActual);
   }
 });
 
-document.querySelector("[onclick=\"mostrarSeccion('historia')\"]").addEventListener("click", () => {
-  capActual = 0;
-  mostrarCapitulo(capActual);
+// Botón para volver a Intro
+document.getElementById("volverIntroBtn").addEventListener("click", () => {
+  document.getElementById("historia").style.display = "none";
+  document.getElementById("intro").style.display = "block";
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ===========================
-//      VIDEOS DIARIOS
-// ===========================
+// ==================================================
+//        VIDEOS DIARIOS
+// ==================================================
 const videosDiarios = [
   { fecha: "1 de marzo", enlace: "https://youtu.be/U68D7p7x19c" },
   { fecha: "2 de marzo", enlace: "https://youtu.be/GFQP1yHPR1U" },
@@ -231,17 +254,20 @@ function mostrarVideoDiario(index) {
   contenedor.appendChild(iframe);
 
   document.getElementById("anteriorVideo").disabled = (index === 0);
+
   if (index === videosDiarios.length - 1) {
-    document.getElementById("siguienteVideo").innerText = "Continuar con las canciones";
+    document.getElementById("siguienteVideo").innerText = "🎶 Continuar con canciones";
   } else {
     document.getElementById("siguienteVideo").innerText = "Siguiente";
   }
 }
 
+// Botones de Videos diarios
 document.getElementById("anteriorVideo").addEventListener("click", () => {
   if (videoActual > 0) {
     videoActual--;
     mostrarVideoDiario(videoActual);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 });
 
@@ -249,48 +275,102 @@ document.getElementById("siguienteVideo").addEventListener("click", () => {
   if (videoActual < videosDiarios.length - 1) {
     videoActual++;
     mostrarVideoDiario(videoActual);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
-    // Último video: pasar a Canciones
-    mostrarSeccion('canciones');
-    cargarCancion();
+    // Último video => pasar a Canciones
+    document.getElementById("videos").style.display = "none";
+    document.getElementById("canciones").style.display = "block";
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    cargarCanciones();
   }
 });
 
-document.querySelector("[onclick=\"mostrarSeccion('videos')\"]").addEventListener("click", () => {
-  videoActual = 0;
-  mostrarVideoDiario(videoActual);
+// Botón para volver a la historia
+document.getElementById("volverHistoriaBtn").addEventListener("click", () => {
+  document.getElementById("videos").style.display = "none";
+  document.getElementById("historia").style.display = "block";
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ===========================
-//         CANCIONES
-// ===========================
-function cargarCancion() {
+// ==================================================
+//         CANCIONES (Múltiples videos)
+// ==================================================
+const cancionesData = [
+  {
+    title: "Sorry, I Love You - Stray Kids",
+    youtubeId: "hIacHcQUK7k",
+    note: "Bueno aquí no toqué bien el piano pero se intentó jaja."
+  },
+  {
+    title: "Cover en español de Sorry I Love You de SKZ",
+    youtubeId: "ShDSJ9rhUTk",
+    note: "Nmms no podía aguantar la risa xdd."
+  },
+  {
+    title: "Cover romanizado de Sorry I Love You de SKZ",
+    youtubeId: "hItvFg1ttsY",
+    note: "Si no pude cantar en español, mucho menos así, pero wacha que tanto te amo que lo intento JAJA."
+  },
+  {
+    title: "Cover Me de SKZ",
+    youtubeId: "zu1U-pISx6A",
+    note: "Bueno, aquí tampoco me salió perfecto, pero se hizo con todo mi corazón."
+  }
+];
+
+function cargarCanciones() {
   const contenedor = document.getElementById("cancion-contenido");
   contenedor.innerHTML = "";
 
-  const titulo = document.createElement("h3");
-  titulo.innerText = "Sorry, I Love You - Stray Kids";
-  contenedor.appendChild(titulo);
+  cancionesData.forEach(cancion => {
+    // Título
+    const titulo = document.createElement("h3");
+    titulo.innerText = cancion.title;
+    contenedor.appendChild(titulo);
 
-  const iframe = document.createElement("iframe");
-  iframe.src = "https://www.youtube.com/embed/hIacHcQUK7k";
-  iframe.frameBorder = "0";
-  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-  iframe.allowFullscreen = true;
-  iframe.style.width = "100%";
-  iframe.style.height = "400px";
-  contenedor.appendChild(iframe);
+    // Video
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube.com/embed/${cancion.youtubeId}`;
+    iframe.frameBorder = "0";
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allowFullscreen = true;
+    iframe.style.width = "100%";
+    iframe.style.height = "400px";
+    contenedor.appendChild(iframe);
+
+    // Nota graciosa/romántica
+    const nota = document.createElement("p");
+    nota.innerText = cancion.note;
+    contenedor.appendChild(nota);
+
+    // Separador visual (opcional)
+    const hr = document.createElement("hr");
+    hr.style.margin = "20px 0";
+    contenedor.appendChild(hr);
+  });
 }
 
+// Botón para continuar a Cositas lindas
 document.getElementById("continuarCositas").addEventListener("click", () => {
-  mostrarSeccion("cositas");
+  document.getElementById("canciones").style.display = "none";
+  document.getElementById("cositas").style.display = "block";
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
   cositaActual = 0;
   mostrarCosita(cositaActual);
 });
 
-// ===========================
+// Botón para volver a Videos
+document.getElementById("volverVideosBtn").addEventListener("click", () => {
+  document.getElementById("canciones").style.display = "none";
+  document.getElementById("videos").style.display = "block";
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ==================================================
 //      COSITAS LINDAS
-// ===========================
+// ==================================================
 /*
   Orden deseado:
     1) Texto + img "calaquitas"
@@ -298,7 +378,7 @@ document.getElementById("continuarCositas").addEventListener("click", () => {
     3) Video 1
     4) Video 2
     5) Video 3
-    6) Texto final súper romántico
+    6) Texto final + video final
 */
 const cositasData = [
   {
@@ -339,7 +419,8 @@ const cositasData = [
 
       Con todo mi amor y esperando que algún día volvamos a coincidir,
       Diego Yorel Castelán Silva ❤️
-    `
+    `,
+    videoId: "PLACEHOLDER_FINAL"
   }
 ];
 
@@ -372,8 +453,20 @@ function mostrarCosita(index) {
     iframe.style.width = "100%";
     iframe.style.height = "400px";
     contenedor.appendChild(iframe);
+  } else if (data.type === "final") {
+    // Texto final ya lo añadimos arriba
+    // Agregamos un iframe adicional si tienes un video final
+    if (data.videoId) {
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube.com/embed/${data.videoId}`;
+      iframe.frameBorder = "0";
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      iframe.style.width = "100%";
+      iframe.style.height = "400px";
+      contenedor.appendChild(iframe);
+    }
   }
-  // En el caso de "final", el texto ya se añadió
 
   contenedor.classList.remove("fade");
   void contenedor.offsetWidth;
@@ -383,27 +476,35 @@ function mostrarCosita(index) {
 
   const btnSiguiente = document.getElementById("siguienteCosita");
   if (index === cositasData.length - 1) {
-    btnSiguiente.innerText = "Volver al menú";
+    btnSiguiente.innerText = "Fin";
     btnSiguiente.onclick = () => {
-      mostrarSeccion('menuSecciones');
+      alert("Gracias por ver todo. Ojalá haya servido para recordarte lo mucho que te amo. ❤️");
+      // Aquí podrías resetear la página, o redirigir a otro lado.
+      // location.reload();
+      document.getElementById("cositas").style.display = "none";
     };
   } else {
     btnSiguiente.innerText = "Siguiente";
     btnSiguiente.onclick = () => {
       cositaActual++;
       mostrarCosita(cositaActual);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     };
   }
 }
 
+// Botones "Anterior" y "Siguiente" de Cositas lindas
 document.getElementById("anteriorCosita").addEventListener("click", () => {
   if (cositaActual > 0) {
     cositaActual--;
     mostrarCosita(cositaActual);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 });
 
-document.querySelector("[onclick=\"mostrarSeccion('cositas')\"]").addEventListener("click", () => {
-  cositaActual = 0;
-  mostrarCosita(cositaActual);
+// Botón para volver a Canciones
+document.getElementById("volverCancionesBtn").addEventListener("click", () => {
+  document.getElementById("cositas").style.display = "none";
+  document.getElementById("canciones").style.display = "block";
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });

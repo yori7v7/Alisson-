@@ -7,23 +7,25 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Intro -->
-  <div class="intro">
+  <!-- Intro (Video + Texto) -->
+  <div class="intro" id="intro">
     <h1>Alisson Andrea Huerta Mejía 👉👈❤️</h1>
-    <p>Antes de decir cualquier cosa… quería contarte una historia. Nuestra historia.❤️</p>
-    <button id="startBtn">Comenzar</button>
-  </div>
-
-  <!-- Menú de secciones -->
-  <div id="menuSecciones" style="display: none;">
-    <button onclick="mostrarSeccion('historia')">📖 Nuestra historia</button>
-    <button onclick="mostrarSeccion('videos')">👥 Videos diarios</button>
-    <button onclick="mostrarSeccion('canciones')">🎶 Canciones</button>
-    <button onclick="mostrarSeccion('cositas')">💖 Cositas lindas</button>
+    <div id="introVideoContainer"></div>
+    <p>
+      ¡Hola, mi amor! Antes de comenzar este recorrido tan especial, quiero darte
+      la bienvenida a este rinconcito virtual que hice con todo mi corazón para ti.
+      Aquí verás pedacitos de nuestros recuerdos, canciones y más.
+      Solo espero que te guste y, sobre todo, que puedas sentir un poquito de todo
+      lo que significas para mí. ❤️
+    </p>
+    <button id="continuarHistoriaBtn">📖 Continuar con nuestra historia</button>
   </div>
 
   <!-- Sección: Nuestra historia -->
   <div id="historia" style="display: none;">
+    <!-- Botón para volver a Intro (por si hay clic erróneo) -->
+    <button id="volverIntroBtn">← Volver al inicio</button>
+
     <div id="capitulo-contenido"></div>
     <p id="contadorCapitulo"></p>
     <button id="anteriorCap">Anterior</button>
@@ -32,9 +34,20 @@
 
   <!-- Sección: Videos diarios -->
   <div id="videos" style="display: none;">
+    <!-- Botón para volver a Historia -->
+    <button id="volverHistoriaBtn">← Volver a la historia</button>
+
     <h2>Videos diarios</h2>
     <p>
-      Aquí estarán todos los videos que fui grabando día a día. Solo decidí poner los más relevantes o donde siento que hablo más sin repetirme tanto jaja, por si ves mucha diferencia entre las fechas, básicamente estos videos son de mi día a día pero como no quiero incomodarte o molestarte llenándote de llamadas y mensajes pues entonces mejor decidí grabarme expresando lo que sentía en el día con día, contándote cosas y tal. Espero no te aburra mucho, quité varios y no puse todos porque si no sí serían muchos JAJA. Es algo que una vez me pediste que hiciera y nunca lo hice y pues bueno, lamentablemente te entrego esto tarde pero mejor tarde que nunca. Te amo ❤️
+      Aquí estarán todos los videos que fui grabando día a día. Solo decidí poner
+      los más relevantes o donde siento que hablo más sin repetirme tanto jaja, por
+      si ves mucha diferencia entre las fechas, básicamente estos videos son de mi
+      día a día pero como no quiero incomodarte o molestarte llenándote de llamadas
+      y mensajes pues entonces mejor decidí grabarme expresando lo que sentía en el
+      día con día, contándote cosas y tal. Espero no te aburra mucho, quité varios
+      y no puse todos porque si no sí serían muchos JAJA. Es algo que una vez me
+      pediste que hiciera y nunca lo hice y pues bueno, lamentablemente te entrego
+      esto tarde pero mejor tarde que nunca. Te amo ❤️
     </p>
     <div id="videoDiario-contenido"></div>
     <button id="anteriorVideo">Anterior</button>
@@ -43,19 +56,27 @@
 
   <!-- Sección: Canciones -->
   <div id="canciones" style="display: none;">
+    <!-- Botón para volver a Videos diarios -->
+    <button id="volverVideosBtn">← Volver a los videos diarios</button>
+
     <h2>Canciones</h2>
     <p>
-      Aquí estarán las canciones que me aprendí para ti 🎶 ❤️ Traté de tocarla lo mejor que podía pero la verdad es que apenas me dio tiempo de trabajar en todo esto ya que realmente he estado muy ocupado pero espero que valores mi esfuerzo, obviamente lo podría tocar mucho mejor pero lo que faltó aquí fue el tiempo ❤️.
+      Aquí estarán las canciones que me aprendí para ti 🎶 ❤️ Traté de tocarlas lo mejor que podía,
+      aunque la verdad es que apenas me dio tiempo de trabajar en todo esto y he estado muy ocupado;
+      pero espero que valores mi esfuerzo. Obviamente lo podría tocar y cantar mucho mejor,
+      pero lo que faltó aquí fue el tiempo ❤️.
     </p>
     <div id="cancion-contenido"></div>
     <!-- Botón para continuar a la siguiente sección -->
-    <button id="continuarCositas" style="margin-top: 10px;">Continuar con las cositas lindas</button>
+    <button id="continuarCositas">💖 Continuar con las cositas lindas</button>
   </div>
 
   <!-- Sección: Cositas lindas -->
   <div id="cositas" style="display: none;">
+    <!-- Botón para volver a Canciones -->
+    <button id="volverCancionesBtn">← Volver a Canciones</button>
+
     <h2>Cositas lindas</h2>
-    <!-- El texto duplicado se elimina; todo se controlará por JS -->
     <div id="cositas-contenido"></div>
     <button id="anteriorCosita">Anterior</button>
     <button id="siguienteCosita">Siguiente</button>
