@@ -6,7 +6,7 @@ let sonidoActivo = false;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('video-background', {
-    videoId: 'pbhs9gFLp1Q', // ID del video de fondo
+    videoId: 'pbhs9gFLp1Q',
     playerVars: {
       autoplay: 1,
       loop: 1,
@@ -14,7 +14,6 @@ function onYouTubeIframeAPIReady() {
       controls: 0,
       mute: 1,
       enablejsapi: 1,
-      showinfo: 0,
       modestbranding: 1,
       rel: 0
     },
@@ -38,10 +37,9 @@ document.getElementById('activarSonido').addEventListener('click', function() {
 });
 
 // ========================
-// Intro: video + texto
+// Intro: embebido estándar para que se escuche
 // ========================
 function cargarIntroVideo() {
-  // Embed estándar, sin autoplay ni mute
   document.getElementById("introVideoContainer").innerHTML = `
     <iframe
       src="https://www.youtube.com/embed/hgexY-RGXfY"
@@ -61,14 +59,13 @@ document.getElementById("continuarHistoriaBtn").addEventListener("click", () => 
 });
 
 // ========================
-// Navegación auxiliar
+// Navegación entre secciones
 // ========================
 function toggleSection(hideId, showId) {
   document.getElementById(hideId).style.display = "none";
   document.getElementById(showId).style.display = "block";
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 document.getElementById("volverIntroBtn").addEventListener("click",    () => toggleSection("historia","intro"));
 document.getElementById("volverHistoriaBtn").addEventListener("click", () => toggleSection("videos","historia"));
 document.getElementById("volverVideosBtn").addEventListener("click",   () => toggleSection("canciones","videos"));
@@ -107,13 +104,13 @@ function mostrarCapitulo(i) {
   cont.classList.add("fade");
   document.getElementById("anteriorCap").disabled = (i===0);
   document.getElementById("siguienteCap").innerText =
-    (i===totalCaps-1) ? "👥 Continuar con videos diarios" : "Siguiente";
+    (i===totalCaps-1)?"👥 Continuar con videos diarios":"Siguiente";
 }
 
-document.getElementById("anteriorCap").addEventListener("click", ()=>{
+document.getElementById("anteriorCap").addEventListener("click",()=>{
   if(capActual>0){ capActual--; mostrarCapitulo(capActual); window.scrollTo({top:0,behavior:'smooth'}); }
 });
-document.getElementById("siguienteCap").addEventListener("click", ()=>{
+document.getElementById("siguienteCap").addEventListener("click",()=>{
   if(capActual<totalCaps-1){
     capActual++; mostrarCapitulo(capActual); window.scrollTo({top:0,behavior:'smooth'});
   } else {
@@ -176,10 +173,10 @@ document.getElementById("siguienteVideo").addEventListener("click",()=>{
 // Canciones
 // ========================
 const cancionesData=[
-  {title:"Sorry, I Love You - Stray Kids",youtubeId:"hIacHcQUK7k",note:"Bueno aquí no toqué bien el piano pero se intentó jaja."},
-  {title:"Cover en español de Sorry I Love You de SKZ",youtubeId:"ShDSJ9rhUTk",note:"Nmms no podía aguantar la risa xdd."},
-  {title:"Cover romanizado de Sorry I Love You de SKZ",youtubeId:"hItvFg1ttsY",note:"Si no pude cantar en español, mucho menos así, pero wacha que tanto te amo que lo intento JAJA."},
-  {title:"Cover Me de SKZ",youtubeId:"zu1U-pISx6A",note:"Bueno, aquí tampoco me salió perfecto, pero se hizo con todo mi corazón."}
+  {title:"Sorry, I Love You - Stray Kids",youtubeId:"hIacHcQUK7k",note:"Bueno aquí no toqué bien el piano pero se intentó jaja.❤️"},
+  {title:"Cover en español de Sorry I Love You de SKZ",youtubeId:"ShDSJ9rhUTk",note:"Nmms no podía aguantar la risa xdd.❤️"},
+  {title:"Cover romanizado de Sorry I Love You de SKZ",youtubeId:"hItvFg1ttsY",note:"Si no pude cantar en español, mucho menos así, pero wacha que tanto te amo que lo intento JAJA.❤️"},
+  {title:"Cover Me de SKZ",youtubeId:"zu1U-pISx6A",note:"Bueno, aquí tampoco me salió perfecto, pero se hizo con todo mi corazón.❤️"}
 ];
 function cargarCanciones(){
   const cont=document.getElementById("cancion-contenido");
@@ -209,28 +206,31 @@ const cositasData=[
   {type:"video",youtubeId:"LyDevjFr5fE"},
   {type:"video",youtubeId:"JLOUxj9kuwU"},
   {type:"video",youtubeId:"W9GY6RV_Vbg"},
-  {type:"final",text:`
+  {
+    type:"final",
+    text:`
+❤️ 17/04/2025 ❤️
 
-      ❤️ 17/04/2025 ❤️
+Mi amada Alisson:
 
-      Mi amada Alisson:
+Hemos llegado al final de esta pequeña gran sorpresa. Antes que nada, quiero agradecerte por existir en mi vida y por cada sonrisa que me has regalado. También quiero pedirte perdón por todos mis errores, por las veces en que mis acciones o mis palabras te lastimaron y, sobre todo, por no haberte cuidado como merecías.
 
-      Hemos llegado al final de esta pequeña gran sorpresa. Antes que nada, quiero agradecerte por existir en mi vida y por cada sonrisa que me has regalado. También quiero pedirte perdón por todos mis errores, por las veces en que mis acciones o mis palabras te lastimaron y, sobre todo, por no haberte cuidado como merecías.
+Hoy, en nuestro aniversario, quiero que sepas que mi corazón sigue atado al tuyo. Si de verdad estás segura de que no sientes nada ya por mí, entiendo tu decisión y la respeto. Pero si en algún momento, durante este recorrido, sentiste una pizca de ese amor que antes nos unía, para mí es la prueba de que nuestro amor persiste. Te quiero recuperar a como dé lugar, pero también sabré esperar lo que haga falta, porque confío en que lo que vivimos no fue en vano.
 
-      Hoy, en nuestro aniversario, quiero que sepas que mi corazón sigue atado al tuyo. Si de verdad estás segura de que no sientes nada ya por mí, entiendo tu decisión y la respeto. Pero si en algún momento, durante este recorrido, sentiste una pizca de ese amor que antes nos unía, para mí es la prueba de que nuestro amor persiste. Te quiero recuperar a como dé lugar, pero también sabré esperar lo que haga falta, porque confío en que lo que vivimos no fue en vano.
+Te deseo lo mejor, aunque sea lejos de mí. Sin embargo, no negaré que mi ilusión sigue siendo que un día nos reencontremos y volvamos a sonreír juntos. Perdón por mis estupideces, por las veces en que te incomodé o te hice enojar. Me arrepiento de haber arruinado algo tan bello que teníamos, y aunque me digas que no, yo seguiré confiando en que nuestro amor fue (y es) real.
 
-      Te deseo lo mejor, aunque sea lejos de mí. Sin embargo, no negaré que mi ilusión sigue siendo que un día nos reencontremos y volvamos a sonreír juntos. Perdón por mis estupideces, por las veces en que te incomodé o te hice enojar. Me arrepiento de haber arruinado algo tan bello que teníamos, y aunque me digas que no, yo seguiré confiando en que nuestro amor fue (y es) real.
+Gracias por cada momento que compartiste conmigo, por tu dulzura, por tu alegría, por tu manera de ver la vida y hacerme sentir tan especial. Pase lo que pase, siempre tendrás un pedazo de mi corazón.
 
-      Gracias por cada momento que compartiste conmigo, por tu dulzura, por tu alegría, por tu manera de ver la vida y hacerme sentir tan especial. Pase lo que pase, siempre tendrás un pedazo de mi corazón.
+Con todo mi amor y esperando que algún día volvamos a coincidir,
 
-      Con todo mi amor y esperando que algún día volvamos a coincidir,  
-
-      Diego Yorel Castelán Silva. ❤️
-
-    `,videoId:"ym0gklzDw3c"}
+Diego Yorel Castelán Silva. ❤️
+    `,
+    videoId:"ym0gklzDw3c"
+  }
 ];
 let cositaActual=0;
 let noCount=0;
+
 function mostrarCosita(i){
   const cont=document.getElementById("cositas-contenido");
   cont.innerHTML="";
@@ -279,14 +279,15 @@ function mostrarCosita(i){
   if(d.type==="final"){
     const yes=document.getElementById("respSi");
     const no =document.getElementById("respNo");
-    yes.onclick=()=>alert("nmms de vrd :0?, no fue missclick? no me engañes de esa manera JAJA");
+    yes.onclick=()=>alert("nmms de vrd :0?, no fue missclick? no me engañes de esa manera JAJA.❤️");
     no.onclick=()=>{
       noCount++;
       if(noCount<=3)yes.style.transform=`scale(${1+0.3*noCount})`;
-      if(noCount===3)alert("Bueno, ya entendí… ¡tenía que intentarlo! 😊");
+      if(noCount===3)alert("Bueno, ya entendí… tenía que intentarlo unu.❤️");
     };
   }
 }
+
 document.getElementById("anteriorCosita").addEventListener("click",()=>{
   if(cositaActual>0){ cositaActual--; mostrarCosita(cositaActual); window.scrollTo({top:0,behavior:'smooth'}); }
 });

@@ -16,7 +16,7 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* Justificar párrafos y aumentar interlineado */
+/* Justificar párrafos y mejorar interlineado */
 .intro p,
 #videos p,
 #canciones p,
@@ -61,7 +61,7 @@ img {
 
 @keyframes fadeIn {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }
 
 .video-background {
@@ -76,7 +76,7 @@ img {
 
 .video-background iframe {
   width: 100vw;
-  height: 56.25vw; /* 16:9 ratio */
+  height: 56.25vw; /* 16:9 */
   min-height: 100vh;
   min-width: 177.77vh;
   position: absolute;
