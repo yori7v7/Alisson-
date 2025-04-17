@@ -41,13 +41,12 @@ document.getElementById('activarSonido').addEventListener('click', function() {
 // Intro: video + texto
 // ========================
 function cargarIntroVideo() {
-  const origin = encodeURIComponent(window.location.origin);
+  // Usamos dominio privacy-enhanced y parámetros de autoplay+mute
   document.getElementById("introVideoContainer").innerHTML = `
     <iframe
-      id="introPlayer"
-      src="https://www.youtube.com/embed/hgexY-RGXfY?rel=0&enablejsapi=1&autoplay=1&mute=1&origin=${origin}"
+      src="https://www.youtube-nocookie.com/embed/hgexY-RGXfY?autoplay=1&mute=1&loop=1&playlist=hgexY-RGXfY&controls=0&rel=0"
       frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allow="autoplay; encrypted-media; picture-in-picture"
       allowfullscreen
       style="width:100%;height:400px;"
     ></iframe>
@@ -103,31 +102,23 @@ const totalCaps = capitulos.length;
 function mostrarCapitulo(i) {
   const cont = document.getElementById("capitulo-contenido");
   cont.innerHTML = `<p>${capitulos[i].texto}</p>` +
-                   capitulos[i].imagenes.map(src => `<img src="${src}">`).join("");
+                   capitulos[i].imagenes.map(src=>`<img src="${src}">`).join("");
   document.getElementById("contadorCapitulo").innerText = `Capítulo ${i+1}/${totalCaps}`;
   cont.classList.add("fade");
-  document.getElementById("anteriorCap").disabled = (i === 0);
-  document.getElementById("siguienteCap").innerText =
-    (i === totalCaps - 1) ? "👥 Continuar con videos diarios" : "Siguiente";
+  document.getElementById("anteriorCap").disabled = (i===0);
+  document.getElementById("siguienteCap").innerText = 
+    (i===totalCaps-1) ? "👥 Continuar con videos diarios" : "Siguiente";
 }
 
-document.getElementById("anteriorCap").addEventListener("click", () => {
-  if (capActual > 0) {
-    capActual--;
-    mostrarCapitulo(capActual);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+document.getElementById("anteriorCap").addEventListener("click", ()=>{
+  if(capActual>0){ capActual--; mostrarCapitulo(capActual); window.scrollTo({top:0,behavior:'smooth'}); }
 });
-
-document.getElementById("siguienteCap").addEventListener("click", () => {
-  if (capActual < totalCaps - 1) {
-    capActual++;
-    mostrarCapitulo(capActual);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+document.getElementById("siguienteCap").addEventListener("click", ()=>{
+  if(capActual<totalCaps-1){
+    capActual++; mostrarCapitulo(capActual); window.scrollTo({top:0,behavior:'smooth'});
   } else {
-    toggleSection("historia", "videos");
-    videoActual = 0;
-    mostrarVideoDiario(0);
+    toggleSection("historia","videos");
+    videoActual=0; mostrarVideoDiario(0);
   }
 });
 
@@ -135,60 +126,48 @@ document.getElementById("siguienteCap").addEventListener("click", () => {
 // Videos diarios
 // ========================
 const videosDiarios = [
-  { fecha: "1 de marzo", enlace: "https://youtu.be/U68D7p7x19c" },
-  { fecha: "2 de marzo", enlace: "https://youtu.be/GFQP1yHPR1U" },
-  { fecha: "3 de marzo", enlace: "https://youtu.be/mpS1ZmBh9uk" },
-  { fecha: "4 de marzo", enlace: "https://youtu.be/eWNTmWkZo00" },
-  { fecha: "5 de marzo", enlace: "https://youtu.be/F-sApx5VbwI" },
-  { fecha: "6 de marzo", enlace: "https://youtu.be/JCqYZCWD4RY" },
-  { fecha: "7 de marzo", enlace: "https://youtu.be/jb29tN7Tjyw" },
-  { fecha: "8 de marzo", enlace: "https://youtu.be/Mv3jDd73jBQ" },
-  { fecha: "9 de marzo", enlace: "https://youtu.be/IcBFqiy8P_w" },
-  { fecha: "10 de marzo", enlace: "https://youtu.be/m52ENaXsaaA" },
-  { fecha: "15 de marzo", enlace: "https://youtu.be/U0fiA0oyBHk" },
-  { fecha: "26 de marzo", enlace: "https://youtu.be/2FTJ2H4J-VI" },
-  { fecha: "28 de marzo", enlace: "https://youtu.be/i7qoVELfEh4" },
-  { fecha: "5 de abril", enlace: "https://youtu.be/4L3BmmLbJ04" },
-  { fecha: "6 de abril", enlace: "https://youtu.be/ZMnjbt3ynVI" },
-  { fecha: "13 de abril", enlace: "https://youtu.be/PXHrS78O7OQ" },
-  { fecha: "16 de abril", enlace: "https://youtube.com/shorts/9dyyqIbCa4o?feature=share" },
-  { fecha: "17 de abril", enlace: "https://youtu.be/WicT03V2jOM" }
+  { fecha:"1 de marzo", enlace:"https://youtu.be/U68D7p7x19c" },
+  { fecha:"2 de marzo", enlace:"https://youtu.be/GFQP1yHPR1U" },
+  { fecha:"3 de marzo", enlace:"https://youtu.be/mpS1ZmBh9uk" },
+  { fecha:"4 de marzo", enlace:"https://youtu.be/eWNTmWkZo00" },
+  { fecha:"5 de marzo", enlace:"https://youtu.be/F-sApx5VbwI" },
+  { fecha:"6 de marzo", enlace:"https://youtu.be/JCqYZCWD4RY" },
+  { fecha:"7 de marzo", enlace:"https://youtu.be/jb29tN7Tjyw" },
+  { fecha:"8 de marzo", enlace:"https://youtu.be/Mv3jDd73jBQ" },
+  { fecha:"9 de marzo", enlace:"https://youtu.be/IcBFqiy8P_w" },
+  { fecha:"10 de marzo", enlace:"https://youtu.be/m52ENaXsaaA" },
+  { fecha:"15 de marzo", enlace:"https://youtu.be/U0fiA0oyBHk" },
+  { fecha:"26 de marzo", enlace:"https://youtu.be/2FTJ2H4J-VI" },
+  { fecha:"28 de marzo", enlace:"https://youtu.be/i7qoVELfEh4" },
+  { fecha:"5 de abril", enlace:"https://youtu.be/4L3BmmLbJ04" },
+  { fecha:"6 de abril", enlace:"https://youtu.be/ZMnjbt3ynVI" },
+  { fecha:"13 de abril", enlace:"https://youtu.be/PXHrS78O7OQ" },
+  { fecha:"16 de abril", enlace:"https://youtube.com/shorts/9dyyqIbCa4o?feature=share" },
+  { fecha:"17 de abril", enlace:"https://youtu.be/WicT03V2jOM" }
 ];
-let videoActual = 0;
-
-function mostrarVideoDiario(i) {
+let videoActual=0;
+function mostrarVideoDiario(i){
   const cont = document.getElementById("videoDiario-contenido");
   const id = videosDiarios[i].enlace.split('/').pop().split('?')[0];
-  cont.innerHTML = `
-    <h3>${videosDiarios[i].fecha}</h3>
+  cont.innerHTML = `<h3>${videosDiarios[i].fecha}</h3>
     <iframe
       src="https://www.youtube.com/embed/${id}"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      style="width:100%;height:400px;"
-    ></iframe>
-  `;
-  document.getElementById("anteriorVideo").disabled = (i === 0);
-  document.getElementById("siguienteVideo").innerText =
-    (i === videosDiarios.length - 1) ? "🎶 Continuar con canciones" : "Siguiente";
+      allowfullscreen style="width:100%;height:400px;"
+    ></iframe>`;
+  document.getElementById("anteriorVideo").disabled=(i===0);
+  document.getElementById("siguienteVideo").innerText = 
+    (i===videosDiarios.length-1) ? "🎶 Continuar con canciones" : "Siguiente";
 }
-
-document.getElementById("anteriorVideo").addEventListener("click", () => {
-  if (videoActual > 0) {
-    videoActual--;
-    mostrarVideoDiario(videoActual);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+document.getElementById("anteriorVideo").addEventListener("click", ()=>{
+  if(videoActual>0){ videoActual--; mostrarVideoDiario(videoActual); window.scrollTo({top:0,behavior:'smooth'}); }
 });
-
-document.getElementById("siguienteVideo").addEventListener("click", () => {
-  if (videoActual < videosDiarios.length - 1) {
-    videoActual++;
-    mostrarVideoDiario(videoActual);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+document.getElementById("siguienteVideo").addEventListener("click", ()=>{
+  if(videoActual<videosDiarios.length-1){
+    videoActual++; mostrarVideoDiario(videoActual); window.scrollTo({top:0,behavior:'smooth'});
   } else {
-    toggleSection("videos", "canciones");
+    toggleSection("videos","canciones");
     cargarCanciones();
   }
 });
@@ -197,46 +176,40 @@ document.getElementById("siguienteVideo").addEventListener("click", () => {
 // Canciones
 // ========================
 const cancionesData = [
-  { title: "Sorry, I Love You - Stray Kids", youtubeId: "hIacHcQUK7k", note: "Bueno aquí no toqué bien el piano pero se intentó jaja." },
-  { title: "Cover en español de Sorry I Love You de SKZ", youtubeId: "ShDSJ9rhUTk", note: "Nmms no podía aguantar la risa xdd." },
-  { title: "Cover romanizado de Sorry I Love You de SKZ", youtubeId: "hItvFg1ttsY", note: "Si no pude cantar en español, mucho menos así, pero wacha que tanto te amo que lo intento JAJA." },
-  { title: "Cover Me de SKZ", youtubeId: "zu1U-pISx6A", note: "Bueno, aquí tampoco me salió perfecto, pero se hizo con todo mi corazón." }
+  { title:"Sorry, I Love You - Stray Kids", youtubeId:"hIacHcQUK7k", note:"Bueno aquí no toqué bien el piano pero se intentó jaja." },
+  { title:"Cover en español de Sorry I Love You de SKZ", youtubeId:"ShDSJ9rhUTk", note:"Nmms no podía aguantar la risa xdd." },
+  { title:"Cover romanizado de Sorry I Love You de SKZ", youtubeId:"hItvFg1ttsY", note:"Si no pude cantar en español, mucho menos así, pero wacha que tanto te amo que lo intento JAJA." },
+  { title:"Cover Me de SKZ", youtubeId:"zu1U-pISx6A", note:"Bueno, aquí tampoco me salió perfecto, pero se hizo con todo mi corazón." }
 ];
-
-function cargarCanciones() {
+function cargarCanciones(){
   const cont = document.getElementById("cancion-contenido");
-  cont.innerHTML = cancionesData.map(c => `
+  cont.innerHTML = cancionesData.map(c=>`
     <h3>${c.title}</h3>
     <iframe
       src="https://www.youtube.com/embed/${c.youtubeId}"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      style="width:100%;height:400px;"
+      allowfullscreen style="width:100%;height:400px;"
     ></iframe>
     <p>${c.note}</p>
     <hr style="margin:20px 0;">
   `).join("");
 }
-
-document.getElementById("continuarCositas").addEventListener("click", () => {
-  toggleSection("canciones", "cositas");
-  cositaActual = 0;
-  mostrarCosita(0);
+document.getElementById("continuarCositas").addEventListener("click", ()=>{
+  toggleSection("canciones","cositas");
+  cositaActual=0; mostrarCosita(0);
 });
 
 // ========================
-// Cositas lindas + prompt
+// Cositas lindas + prompt final
 // ========================
 const cositasData = [
-  { type: "images", text: "Aquí estaré añadiendo todas las cositas lindas para ti: fotos, videos de dedicatorias, frases y más. ❤️", images: ["frases/calaquitas.jpg"] },
-  { type: "images", images: ["frases/uno.jpg","frases/dos.jpg","frases/tres.jpg"] },
-  { type: "video", youtubeId: "LyDevjFr5fE" },
-  { type: "video", youtubeId: "JLOUxj9kuwU" },
-  { type: "video", youtubeId: "W9GY6RV_Vbg" },
-  {
-    type: "final",
-    text: `
+  { type:"images", text:"Aquí estaré añadiendo todas las cositas lindas para ti: fotos, videos de dedicatorias, frases y más. ❤️", images:["frases/calaquitas.jpg"] },
+  { type:"images", images:["frases/uno.jpg","frases/dos.jpg","frases/tres.jpg"] },
+  { type:"video", youtubeId:"LyDevjFr5fE" },
+  { type:"video", youtubeId:"JLOUxj9kuwU" },
+  { type:"video", youtubeId:"W9GY6RV_Vbg" },
+  { type:"final", text:`
       ❤️ 17/04/2025 ❤️
 
       Mi amada Alisson:
@@ -251,92 +224,72 @@ const cositasData = [
 
       Con todo mi amor y esperando que algún día volvamos a coincidir,
       Diego Yorel Castelán Silva ❤️
-    `,
-    videoId: "ym0gklzDw3c"
-  }
+    `, videoId:"ym0gklzDw3c" }
 ];
-let cositaActual = 0;
-let noCount = 0;
+let cositaActual=0;
+let noCount=0;
 
-function mostrarCosita(i) {
-  const cont = document.getElementById("cositas-contenido");
-  cont.innerHTML = "";
-  const d = cositasData[i];
+function mostrarCosita(i){
+  const cont=document.getElementById("cositas-contenido");
+  cont.innerHTML="";
+  const d=cositasData[i];
 
-  if (d.text) cont.innerHTML += `<p>${d.text.trim()}</p>`;
-
-  if (d.type === "images") {
-    d.images.forEach(src => cont.innerHTML += `<img src="${src}">`);
-  } else if (d.type === "video") {
-    cont.innerHTML += `
-      <iframe
-        src="https://www.youtube.com/embed/${d.youtubeId}"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        style="width:100%;height:400px;"
-      ></iframe>
-    `;
-  } else if (d.type === "final") {
-    cont.innerHTML += `
+  if(d.text) cont.innerHTML+=`<p>${d.text.trim()}</p>`;
+  if(d.type==="images") d.images.forEach(src=>cont.innerHTML+=`<img src="${src}">`);
+  else if(d.type==="video") cont.innerHTML+=`
+    <iframe
+      src="https://www.youtube.com/embed/${d.youtubeId}"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen style="width:100%;height:400px;">
+    </iframe>`;
+  else if(d.type==="final"){
+    cont.innerHTML+=`
       <iframe
         src="https://www.youtube.com/embed/${d.videoId}"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        style="width:100%;height:400px;margin-top:20px;"
-      ></iframe>
+        allowfullscreen style="width:100%;height:400px;margin-top:20px;">
+      </iframe>
       <div id="preguntaNovia" style="margin-top:20px;">
         <p>¿Quieres volver a ser mi novia?</p>
         <button id="respSi" class="resp-btn">Sí ❤️</button>
         <button id="respNo" class="resp-btn">No 😢</button>
-      </div>
-    `;
+      </div>`;
   }
 
   cont.classList.add("fade");
-  document.getElementById("anteriorCosita").disabled = (i === 0);
+  document.getElementById("anteriorCosita").disabled=(i===0);
 
-  const btn = document.getElementById("siguienteCosita");
-  if (i === cositasData.length - 1) {
-    btn.innerText = "Fin";
-    btn.onclick = () => {
+  const btn=document.getElementById("siguienteCosita");
+  if(i===cositasData.length-1){
+    btn.innerText="Fin";
+    btn.onclick=()=>{
       alert("Gracias por ver todo. Ojalá haya servido para recordarte lo mucho que te amo. ❤️");
-      // Oculta todas las secciones excepto el fondo de YouTube
-      ["intro","historia","videos","canciones","cositas","activarSonido"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = "none";
-      });
+      ["intro","historia","videos","canciones","cositas","activarSonido"]
+        .forEach(id=>{ const e=document.getElementById(id); if(e) e.style.display="none"; });
     };
   } else {
-    btn.innerText = "Siguiente";
-    btn.onclick = () => {
+    btn.innerText="Siguiente";
+    btn.onclick=()=>{
       cositaActual++;
       mostrarCosita(cositaActual);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({top:0,behavior:'smooth'});
     };
   }
 
-  if (d.type === "final") {
-    const yesBtn = document.getElementById("respSi");
-    const noBtn  = document.getElementById("respNo");
-    yesBtn.onclick = () => alert("nmms de vrd :0?, no fue missclick? no me engañes de esa manera JAJA");
-    noBtn.onclick  = () => {
+  if(d.type==="final"){
+    const yes=document.getElementById("respSi");
+    const no =document.getElementById("respNo");
+    yes.onclick=()=>alert("nmms de vrd :0?, no fue missclick? no me engañes de esa manera JAJA");
+    no.onclick=()=>{
       noCount++;
-      if (noCount <= 3) {
-        yesBtn.style.transform = `scale(${1 + 0.3 * noCount})`;
-      }
-      if (noCount === 3) {
-        alert("Bueno, ya entendí… ¡tenía que intentarlo! 😊");
-      }
+      if(noCount<=3) yes.style.transform=`scale(${1+0.3*noCount})`;
+      if(noCount===3) alert("Bueno, ya entendí… ¡tenía que intentarlo! 😊");
     };
   }
 }
 
-document.getElementById("anteriorCosita").addEventListener("click", () => {
-  if (cositaActual > 0) {
-    cositaActual--;
-    mostrarCosita(cositaActual);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+document.getElementById("anteriorCosita").addEventListener("click",()=>{
+  if(cositaActual>0){ cositaActual--; mostrarCosita(cositaActual); window.scrollTo({top:0,behavior:'smooth'}); }
 });
