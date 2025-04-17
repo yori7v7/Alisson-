@@ -1,12 +1,12 @@
-// ==================================================
-//        YOUTUBE BACKGROUND MUSIC (Música de fondo)
-// ==================================================
+// ========================
+// Música de fondo YouTube
+// ========================
 let player;
 let sonidoActivo = false;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('video-background', {
-    videoId: 'pbhs9gFLp1Q',  // Tu ID de video de fondo
+    videoId: 'pbhs9gFLp1Q', // ID del video de fondo
     playerVars: {
       autoplay: 1,
       loop: 1,
@@ -19,63 +19,63 @@ function onYouTubeIframeAPIReady() {
       rel: 0
     },
     events: {
-      onReady: (event) => event.target.playVideo()
+      onReady: e => e.target.playVideo()
     }
   });
 }
 
-document.getElementById('activarSonido').addEventListener('click', () => {
-  if (player && player.unMute) {
-    if (!sonidoActivo) {
-      player.unMute();
-      player.setVolume(8);
-      document.getElementById('activarSonido').innerText = "🔇 Silenciar";
-      sonidoActivo = true;
-    } else {
-      player.mute();
-      document.getElementById('activarSonido').innerText = "🎶 Activar música";
-      sonidoActivo = false;
-    }
+document.getElementById('activarSonido').addEventListener('click', function() {
+  if (!player) return;
+  if (!sonidoActivo) {
+    player.unMute();
+    player.setVolume(8);
+    this.innerText = "🔇 Silenciar";
+  } else {
+    player.mute();
+    this.innerText = "🎶 Activar música";
   }
+  sonidoActivo = !sonidoActivo;
 });
 
-// ==================================================
-//          INTRO (Video + texto inicial)
-// ==================================================
+// ========================
+// Intro: video + texto
+// ========================
 function cargarIntroVideo() {
-  const introContainer = document.getElementById("introVideoContainer");
-  introContainer.innerHTML = "";
-
-  // Reemplaza 'PLACEHOLDER_VIDEO_ID' con el ID real
-  // cuando tengas el link de YouTube para la introducción.
-  const iframe = document.createElement("iframe");
-  iframe.src = "https://www.youtube.com/embed/PLACEHOLDER_VIDEO_ID";
-  iframe.frameBorder = "0";
-  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-  iframe.allowFullscreen = true;
-  iframe.style.width = "100%";
-  iframe.style.height = "400px";
-
-  introContainer.appendChild(iframe);
+  document.getElementById("introVideoContainer").innerHTML = `
+    <iframe
+      src="https://www.youtube.com/embed/hgexY-RGXfY"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="width:100%;height:400px;"
+    ></iframe>
+  `;
 }
-
-// Cargar el video de intro apenas abra la página
 cargarIntroVideo();
 
-// Botón para continuar con la historia
 document.getElementById("continuarHistoriaBtn").addEventListener("click", () => {
-  // Ocultamos intro, mostramos historia
-  document.getElementById("intro").style.display = "none";
-  document.getElementById("historia").style.display = "block";
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
+  toggleSection("intro", "historia");
   capActual = 0;
-  mostrarCapitulo(capActual);
+  mostrarCapitulo(0);
 });
 
-// ==================================================
-//     NUESTRA HISTORIA
-// ==================================================
+// ========================
+// Navegación auxiliar
+// ========================
+function toggleSection(hideId, showId) {
+  document.getElementById(hideId).style.display = "none";
+  document.getElementById(showId).style.display = "block";
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.getElementById("volverIntroBtn").addEventListener("click", () => toggleSection("historia","intro"));
+document.getElementById("volverHistoriaBtn").addEventListener("click", () => toggleSection("videos","historia"));
+document.getElementById("volverVideosBtn").addEventListener("click", () => toggleSection("canciones","videos"));
+document.getElementById("volverCancionesBtn").addEventListener("click", () => toggleSection("cositas","canciones"));
+
+// ========================
+// Nuestra historia
+// ========================
 const capitulos = [
   {
     texto: "Te conocí cuando apenas era este morrillo. ¿Quién iba a imaginar que a esa edad, todo pndjo, conocería a la persona que marcaría el resto de su efímera vida? Gracias por confiar ciegamente en mí. ❤️",
@@ -146,40 +146,20 @@ const capitulos = [
     imagenes: ["imagenes/nostalgia.jpg"]
   }
 ];
-
 let capActual = 0;
 const totalCaps = capitulos.length;
 
-function mostrarCapitulo(index) {
-  const contenido = document.getElementById("capitulo-contenido");
-  contenido.innerHTML = "";
-
-  const cap = capitulos[index];
-  const texto = document.createElement("p");
-  texto.innerText = cap.texto;
-  contenido.appendChild(texto);
-
-  cap.imagenes.forEach(src => {
-    const img = document.createElement("img");
-    img.src = src;
-    contenido.appendChild(img);
-  });
-
-  document.getElementById("contadorCapitulo").innerText = `Capítulo ${index + 1}/${totalCaps}`;
-  contenido.classList.remove("fade");
-  void contenido.offsetWidth; // forzar repaint
-  contenido.classList.add("fade");
-
-  document.getElementById("anteriorCap").disabled = (index === 0);
-
-  if (index === totalCaps - 1) {
-    document.getElementById("siguienteCap").innerText = "👥 Continuar con videos diarios";
-  } else {
-    document.getElementById("siguienteCap").innerText = "Siguiente";
-  }
+function mostrarCapitulo(i) {
+  const cont = document.getElementById("capitulo-contenido");
+  cont.innerHTML = `<p>${capitulos[i].texto}</p>` +
+                   capitulos[i].imagenes.map(src => `<img src="${src}">`).join("");
+  document.getElementById("contadorCapitulo").innerText = `Capítulo ${i+1}/${totalCaps}`;
+  cont.classList.add("fade");
+  document.getElementById("anteriorCap").disabled = (i === 0);
+  document.getElementById("siguienteCap").innerText =
+    (i === totalCaps - 1) ? "👥 Continuar con videos diarios" : "Siguiente";
 }
 
-// Botones "Anterior" y "Siguiente" de Historia
 document.getElementById("anteriorCap").addEventListener("click", () => {
   if (capActual > 0) {
     capActual--;
@@ -194,26 +174,15 @@ document.getElementById("siguienteCap").addEventListener("click", () => {
     mostrarCapitulo(capActual);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
-    // Último capítulo => pasar a Videos diarios
-    document.getElementById("historia").style.display = "none";
-    document.getElementById("videos").style.display = "block";
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
+    toggleSection("historia", "videos");
     videoActual = 0;
     mostrarVideoDiario(videoActual);
   }
 });
 
-// Botón para volver a Intro
-document.getElementById("volverIntroBtn").addEventListener("click", () => {
-  document.getElementById("historia").style.display = "none";
-  document.getElementById("intro").style.display = "block";
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// ==================================================
-//        VIDEOS DIARIOS
-// ==================================================
+// ========================
+// Videos diarios
+// ========================
 const videosDiarios = [
   { fecha: "1 de marzo", enlace: "https://youtu.be/U68D7p7x19c" },
   { fecha: "2 de marzo", enlace: "https://youtu.be/GFQP1yHPR1U" },
@@ -230,39 +199,30 @@ const videosDiarios = [
   { fecha: "28 de marzo", enlace: "https://youtu.be/i7qoVELfEh4" },
   { fecha: "5 de abril", enlace: "https://youtu.be/4L3BmmLbJ04" },
   { fecha: "6 de abril", enlace: "https://youtu.be/ZMnjbt3ynVI" },
-  { fecha: "13 de abril", enlace: "https://youtu.be/PXHrS78O7OQ" }
+  { fecha: "13 de abril", enlace: "https://youtu.be/PXHrS78O7OQ" },
+  { fecha: "16 de abril", enlace: "https://youtube.com/shorts/9dyyqIbCa4o?feature=share" },
+  { fecha: "17 de abril", enlace: "https://youtu.be/WicT03V2jOM" }
 ];
-
 let videoActual = 0;
 
-function mostrarVideoDiario(index) {
-  const contenedor = document.getElementById("videoDiario-contenido");
-  contenedor.innerHTML = "";
-
-  const titulo = document.createElement("h3");
-  titulo.innerText = videosDiarios[index].fecha;
-  contenedor.appendChild(titulo);
-
-  const iframe = document.createElement("iframe");
-  const videoId = videosDiarios[index].enlace.split('/').pop().split('?')[0];
-  iframe.src = `https://www.youtube.com/embed/${videoId}`;
-  iframe.frameBorder = "0";
-  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-  iframe.allowFullscreen = true;
-  iframe.style.width = "100%";
-  iframe.style.height = "400px";
-  contenedor.appendChild(iframe);
-
-  document.getElementById("anteriorVideo").disabled = (index === 0);
-
-  if (index === videosDiarios.length - 1) {
-    document.getElementById("siguienteVideo").innerText = "🎶 Continuar con canciones";
-  } else {
-    document.getElementById("siguienteVideo").innerText = "Siguiente";
-  }
+function mostrarVideoDiario(i) {
+  const cont = document.getElementById("videoDiario-contenido");
+  const id = videosDiarios[i].enlace.split('/').pop().split('?')[0];
+  cont.innerHTML = `
+    <h3>${videosDiarios[i].fecha}</h3>
+    <iframe
+      src="https://www.youtube.com/embed/${id}"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="width:100%;height:400px;"
+    ></iframe>
+  `;
+  document.getElementById("anteriorVideo").disabled = (i === 0);
+  document.getElementById("siguienteVideo").innerText =
+    (i === videosDiarios.length - 1) ? "🎶 Continuar con canciones" : "Siguiente";
 }
 
-// Botones de Videos diarios
 document.getElementById("anteriorVideo").addEventListener("click", () => {
   if (videoActual > 0) {
     videoActual--;
@@ -277,25 +237,14 @@ document.getElementById("siguienteVideo").addEventListener("click", () => {
     mostrarVideoDiario(videoActual);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
-    // Último video => pasar a Canciones
-    document.getElementById("videos").style.display = "none";
-    document.getElementById("canciones").style.display = "block";
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
+    toggleSection("videos", "canciones");
     cargarCanciones();
   }
 });
 
-// Botón para volver a la historia
-document.getElementById("volverHistoriaBtn").addEventListener("click", () => {
-  document.getElementById("videos").style.display = "none";
-  document.getElementById("historia").style.display = "block";
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// ==================================================
-//         CANCIONES (Múltiples videos)
-// ==================================================
+// ========================
+// Canciones
+// ========================
 const cancionesData = [
   {
     title: "Sorry, I Love You - Stray Kids",
@@ -320,66 +269,30 @@ const cancionesData = [
 ];
 
 function cargarCanciones() {
-  const contenedor = document.getElementById("cancion-contenido");
-  contenedor.innerHTML = "";
-
-  cancionesData.forEach(cancion => {
-    // Título
-    const titulo = document.createElement("h3");
-    titulo.innerText = cancion.title;
-    contenedor.appendChild(titulo);
-
-    // Video
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://www.youtube.com/embed/${cancion.youtubeId}`;
-    iframe.frameBorder = "0";
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-    iframe.allowFullscreen = true;
-    iframe.style.width = "100%";
-    iframe.style.height = "400px";
-    contenedor.appendChild(iframe);
-
-    // Nota graciosa/romántica
-    const nota = document.createElement("p");
-    nota.innerText = cancion.note;
-    contenedor.appendChild(nota);
-
-    // Separador visual (opcional)
-    const hr = document.createElement("hr");
-    hr.style.margin = "20px 0";
-    contenedor.appendChild(hr);
-  });
+  const cont = document.getElementById("cancion-contenido");
+  cont.innerHTML = cancionesData.map(c => `
+    <h3>${c.title}</h3>
+    <iframe
+      src="https://www.youtube.com/embed/${c.youtubeId}"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="width:100%;height:400px;"
+    ></iframe>
+    <p>${c.note}</p>
+    <hr style="margin:20px 0;">
+  `).join("");
 }
 
-// Botón para continuar a Cositas lindas
 document.getElementById("continuarCositas").addEventListener("click", () => {
-  document.getElementById("canciones").style.display = "none";
-  document.getElementById("cositas").style.display = "block";
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
+  toggleSection("canciones", "cositas");
   cositaActual = 0;
-  mostrarCosita(cositaActual);
+  mostrarCosita(0);
 });
 
-// Botón para volver a Videos
-document.getElementById("volverVideosBtn").addEventListener("click", () => {
-  document.getElementById("canciones").style.display = "none";
-  document.getElementById("videos").style.display = "block";
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// ==================================================
-//      COSITAS LINDAS
-// ==================================================
-/*
-  Orden deseado:
-    1) Texto + img "calaquitas"
-    2) Imágenes: "uno", "dos", "tres"
-    3) Video 1
-    4) Video 2
-    5) Video 3
-    6) Texto final + video final
-*/
+// ========================
+// Cositas lindas + prompt
+// ========================
 const cositasData = [
   {
     type: "images",
@@ -392,15 +305,15 @@ const cositasData = [
   },
   {
     type: "video",
-    youtubeId: "LyDevjFr5fE" // rezandopaqueregreses
+    youtubeId: "LyDevjFr5fE"
   },
   {
     type: "video",
-    youtubeId: "JLOUxj9kuwU" // enotrouniverso
+    youtubeId: "JLOUxj9kuwU"
   },
   {
     type: "video",
-    youtubeId: "W9GY6RV_Vbg" // dedicatorias
+    youtubeId: "W9GY6RV_Vbg"
   },
   {
     type: "final",
@@ -418,93 +331,105 @@ const cositasData = [
       Gracias por cada momento que compartiste conmigo, por tu dulzura, por tu alegría, por tu manera de ver la vida y hacerme sentir tan especial. Pase lo que pase, siempre tendrás un pedazo de mi corazón.
 
       Con todo mi amor y esperando que algún día volvamos a coincidir,
+
       Diego Yorel Castelán Silva ❤️
     `,
-    videoId: "PLACEHOLDER_FINAL"
+    videoId: "ym0gklzDw3c"
   }
 ];
 
 let cositaActual = 0;
+let noCount = 0;
 
-function mostrarCosita(index) {
-  const contenedor = document.getElementById("cositas-contenido");
-  contenedor.innerHTML = "";
-  
-  const data = cositasData[index];
+function mostrarCosita(i) {
+  const cont = document.getElementById("cositas-contenido");
+  cont.innerHTML = "";
 
-  if (data.text) {
-    const p = document.createElement("p");
-    p.innerText = data.text.trim();
-    contenedor.appendChild(p);
-  }
-  
+  const data = cositasData[i];
+
+  // Texto dinámico
+  if (data.text) cont.innerHTML += `<p>${data.text.trim()}</p>`;
+
+  // Imágenes
   if (data.type === "images") {
-    data.images.forEach(src => {
-      const img = document.createElement("img");
-      img.src = src;
-      contenedor.appendChild(img);
-    });
-  } else if (data.type === "video") {
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://www.youtube.com/embed/${data.youtubeId}`;
-    iframe.frameBorder = "0";
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-    iframe.allowFullscreen = true;
-    iframe.style.width = "100%";
-    iframe.style.height = "400px";
-    contenedor.appendChild(iframe);
-  } else if (data.type === "final") {
-    // Texto final ya lo añadimos arriba
-    // Agregamos un iframe adicional si tienes un video final
-    if (data.videoId) {
-      const iframe = document.createElement("iframe");
-      iframe.src = `https://www.youtube.com/embed/${data.videoId}`;
-      iframe.frameBorder = "0";
-      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-      iframe.allowFullscreen = true;
-      iframe.style.width = "100%";
-      iframe.style.height = "400px";
-      contenedor.appendChild(iframe);
-    }
+    data.images.forEach(src => cont.innerHTML += `<img src="${src}">`);
+  }
+  // Videos
+  else if (data.type === "video") {
+    cont.innerHTML += `
+      <iframe
+        src="https://www.youtube.com/embed/${data.youtubeId}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="width:100%;height:400px;"
+      ></iframe>
+    `;
+  }
+  // Final + pregunta
+  else if (data.type === "final") {
+    cont.innerHTML += `
+      <iframe
+        src="https://www.youtube.com/embed/${data.videoId}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="width:100%;height:400px;margin-top:20px;"
+      ></iframe>
+      <div id="preguntaNovia" style="margin-top:20px;">
+        <p>¿Quieres volver a ser mi novia?</p>
+        <button id="respSi" class="resp-btn">Sí ❤️</button>
+        <button id="respNo" class="resp-btn">No 😢</button>
+      </div>
+    `;
   }
 
-  contenedor.classList.remove("fade");
-  void contenedor.offsetWidth;
-  contenedor.classList.add("fade");
+  cont.classList.add("fade");
+  document.getElementById("anteriorCosita").disabled = (i === 0);
 
-  document.getElementById("anteriorCosita").disabled = (index === 0);
-
-  const btnSiguiente = document.getElementById("siguienteCosita");
-  if (index === cositasData.length - 1) {
-    btnSiguiente.innerText = "Fin";
-    btnSiguiente.onclick = () => {
+  const btn = document.getElementById("siguienteCosita");
+  if (i === cositasData.length - 1) {
+    btn.innerText = "Fin";
+    btn.onclick = () => {
       alert("Gracias por ver todo. Ojalá haya servido para recordarte lo mucho que te amo. ❤️");
-      // Aquí podrías resetear la página, o redirigir a otro lado.
-      // location.reload();
-      document.getElementById("cositas").style.display = "none";
+      // Al cerrar la alerta, ocultar todas las secciones y el botón de sonido:
+      ["intro","historia","videos","canciones","cositas","activarSonido"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = "none";
+      });
+      // Solo queda visible el <div class="video-background"> con el fondo de YouTube
     };
   } else {
-    btnSiguiente.innerText = "Siguiente";
-    btnSiguiente.onclick = () => {
+    btn.innerText = "Siguiente";
+    btn.onclick = () => {
       cositaActual++;
       mostrarCosita(cositaActual);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
   }
+
+  if (data.type === "final") {
+    const yesBtn = document.getElementById("respSi");
+    const noBtn = document.getElementById("respNo");
+    yesBtn.onclick = () => {
+      alert("nmms de vrd :0?, no fue missclick? no me engañes de esa manera JAJA");
+    };
+    noBtn.onclick = () => {
+      noCount++;
+      if (noCount <= 3) {
+        yesBtn.style.transform = `scale(${1 + 0.3 * noCount})`;
+      }
+      if (noCount === 3) {
+        alert("Bueno, ya entendí… tenía que intentarlo unu");
+      }
+    };
+  }
 }
 
-// Botones "Anterior" y "Siguiente" de Cositas lindas
 document.getElementById("anteriorCosita").addEventListener("click", () => {
   if (cositaActual > 0) {
     cositaActual--;
     mostrarCosita(cositaActual);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-});
-
-// Botón para volver a Canciones
-document.getElementById("volverCancionesBtn").addEventListener("click", () => {
-  document.getElementById("cositas").style.display = "none";
-  document.getElementById("canciones").style.display = "block";
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
