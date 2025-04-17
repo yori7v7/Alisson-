@@ -41,9 +41,11 @@ document.getElementById('activarSonido').addEventListener('click', function() {
 // Intro: video + texto
 // ========================
 function cargarIntroVideo() {
+  const origin = encodeURIComponent(window.location.origin);
   document.getElementById("introVideoContainer").innerHTML = `
     <iframe
-      src="https://www.youtube.com/embed/hgexY-RGXfY"
+      id="introPlayer"
+      src="https://www.youtube.com/embed/hgexY-RGXfY?rel=0&enablejsapi=1&autoplay=1&mute=1&origin=${origin}"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
@@ -68,83 +70,32 @@ function toggleSection(hideId, showId) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-document.getElementById("volverIntroBtn").addEventListener("click", () => toggleSection("historia","intro"));
+document.getElementById("volverIntroBtn").addEventListener("click",    () => toggleSection("historia","intro"));
 document.getElementById("volverHistoriaBtn").addEventListener("click", () => toggleSection("videos","historia"));
-document.getElementById("volverVideosBtn").addEventListener("click", () => toggleSection("canciones","videos"));
-document.getElementById("volverCancionesBtn").addEventListener("click", () => toggleSection("cositas","canciones"));
+document.getElementById("volverVideosBtn").addEventListener("click",   () => toggleSection("canciones","videos"));
+document.getElementById("volverCancionesBtn").addEventListener("click",() => toggleSection("cositas","canciones"));
 
 // ========================
 // Nuestra historia
 // ========================
 const capitulos = [
-  {
-    texto: "Te conocí cuando apenas era este morrillo. ¿Quién iba a imaginar que a esa edad, todo pndjo, conocería a la persona que marcaría el resto de su efímera vida? Gracias por confiar ciegamente en mí. ❤️",
-    imagenes: ["imagenes/yorisecu.jpg", "imagenes/yorisecu2.jpg"]
-  },
-  {
-    texto: "Todo comenzó un 17 de agosto del 2018... en Roblox. Había conocido a Val y weno ya sabes qué pasó xd, pero sin saberlo, ese día también conocí a la persona que marcaría mi vida para siempre: Tú. ❤️",
-    imagenes: ["imagenes/juntitos1.jpg"]
-  },
-  {
-    texto: "¿Te acuerdas cuando jugábamos al Royale High? Solo hablábamos, sin hacer mucho, pero en ese lugar nos conocimos más que nunca. Llegaba de la escuela y tú siempre estabas ahí, esperándome. Lista para que habláramos sobre cualquier cosa :3 ❤️",
-    imagenes: ["imagenes/devorando.jpg"]
-  },
-  {
-    texto: "Jajaja el día que te tragaste tremendo ntr 😹😹👻. Todo actuado obvio, pero qué risa nos dio ese rato JAJA. ❤️ (Qué está pasando aquí 🗣️🗣️)",
-    imagenes: ["imagenes/ntr.jpg"]
-  },
-  {
-    texto: "Eras tan random y tan tú. Gracias por todos esos momentos raros pero únicos. ❤️",
-    imagenes: ["imagenes/pedita.jpg"]
-  },
-  {
-    texto: "Cuando alcancé los 10M en el juego ese de ninjas... tú siempre me apoyaste incondicionalmente, incluso cuando mis metas tardaban años. ❤️",
-    imagenes: ["imagenes/10mnin.jpg"]
-  },
-  {
-    texto: "Cuando conseguí el torpedo oguo. Siempre estuviste conmigo en todos mis logros, por más mínimos o absurdos que fueran. Gracias por eso. ❤️",
-    imagenes: ["imagenes/torpedo.jpg"]
-  },
-  {
-    texto: "Mira esas vibes: niña de casita, tierna, preciosa. Nunca cambiaste, sigues siendo esa bb de siempre. ❤️",
-    imagenes: ["imagenes/ali1.jpg", "imagenes/ali2.jpg", "imagenes/ali3.jpg"]
-  },
-  {
-    texto: "“Te amo pero como amics” — así empezó todo. Me rechazaste, pero aún así el amor se nos escapaba en cada palabra. ❤️",
-    imagenes: ["imagenes/teamoamics.jpg"]
-  },
-  {
-    texto: "Cuando por fin te quitaste los filtros... me enamoré más. Tus lentes, tu boquita, tus ojitos, tus cejas... simplemente tú. ❤️",
-    imagenes: ["imagenes/novia1.jpg", "imagenes/novia2.jpg"]
-  },
-  {
-    texto: "Recuerdo nuestra casita en Minecraft. Tú construías palacios mientras yo me perdía en las minas. Teníamos hasta nuestros hijitos virtuales. ❤️",
-    imagenes: ["imagenes/minecraft.jpg", "imagenes/ropa1.jpg", "imagenes/ropa2.jpg"]
-  },
-  {
-    texto: "El día del paro en el Tec. Me apoyaste aunque al inicio no estabas de acuerdo. Siempre estuviste para mí, incluso en mis locuras. ❤️",
-    imagenes: ["imagenes/paro.jpg"]
-  },
-  {
-    texto: "¿Te acuerdas de esto? Solo tú me pedirías algo así, y solo yo te lo mandaría con tanto amor. Nadie más haría eso por ti. También ese día mojaste la cama xdd. Pero fuera de eso... eras tan tú, tan linda, tan sensual y tan mía. También amo esa parte tuya. ❤️",
-    imagenes: ["imagenes/mecorazon.jpg", "imagenes/mojada.jpg"]
-  },
-  {
-    texto: "Tus dibujos siempre me hacían sentir mal por los contrastes a los que te mandaba yo xdd. Aun así, los guardaba como tesoros. Me hacías sentir especial. ❤️",
-    imagenes: ["imagenes/noteit.jpg"]
-  },
-  {
-    texto: "Tus ttas eran arte JAJA. Pero más allá de eso, ver cómo me mirabas mientras las mostrabas... eso me volvía loco. ❤️",
-    imagenes: ["imagenes/tetas.jpg"]
-  },
-  {
-    texto: "No importa el tiempo que pase, ni las vueltas que dé la vida, ni la respuesta que me des hoy o mañana... Yo siempre estaré para ti, apoyándote en cada cosa que emprendas. Me encanta que sigas evolucionando como mujer y como persona, cada día aprendiendo algo nuevo y queriéndote superar más y más, incluso si parte del proceso es ya no tenerte a mi lado, lo entenderé y te desearé siempre lo mejor ❤️. Oye por cierto... ¿Por qué aún con cada día que pasa, sigues poniéndote más hermosa que el anterior? ❤️",
-    imagenes: ["imagenes/alinueva1.jpg", "imagenes/alinueva2.jpg", "imagenes/alinueva3.jpg", "imagenes/alinueva4.jpg"]
-  },
-  {
-    texto: "Al menos aquí... sí pudimos estar juntos. Quizá en esta realidad dibujada por mis recuerdos, los dos nos encontramos como siempre soñé: frente a frente, con el tiempo detenido y sin miedo a perdernos. Aunque sea en una imagen inventada, eres tú. Siempre has sido tú. Y si pudiera pedirle algo al destino, sería que un día, esa escena deje de ser imaginación… y se convierta en nuestra realidad. Porque yo aún quiero vivirla contigo. ❤️",
-    imagenes: ["imagenes/nostalgia.jpg"]
-  }
+  { texto: "Te conocí cuando apenas era este morrillo. ¿Quién iba a imaginar que a esa edad, todo pndjo, conocería a la persona que marcaría el resto de su efímera vida? Gracias por confiar ciegamente en mí. ❤️", imagenes: ["imagenes/yorisecu.jpg","imagenes/yorisecu2.jpg"] },
+  { texto: "Todo comenzó un 17 de agosto del 2018... en Roblox. Había conocido a Val y weno ya sabes qué pasó xd, pero sin saberlo, ese día también conocí a la persona que marcaría mi vida para siempre: Tú. ❤️", imagenes: ["imagenes/juntitos1.jpg"] },
+  { texto: "¿Te acuerdas cuando jugábamos al Royale High? Solo hablábamos, sin hacer mucho, pero en ese lugar nos conocimos más que nunca. Llegaba de la escuela y tú siempre estabas ahí, esperándome. Lista para que habláramos sobre cualquier cosa :3 ❤️", imagenes: ["imagenes/devorando.jpg"] },
+  { texto: "Jajaja el día que te tragaste tremendo ntr 😹😹👻. Todo actuado obvio, pero qué risa nos dio ese rato JAJA. ❤️ (Qué está pasando aquí 🗣️🗣️)", imagenes: ["imagenes/ntr.jpg"] },
+  { texto: "Eras tan random y tan tú. Gracias por todos esos momentos raros pero únicos. ❤️", imagenes: ["imagenes/pedita.jpg"] },
+  { texto: "Cuando alcancé los 10M en el juego ese de ninjas... tú siempre me apoyaste incondicionalmente, incluso cuando mis metas tardaban años. ❤️", imagenes: ["imagenes/10mnin.jpg"] },
+  { texto: "Cuando conseguí el torpedo oguo. Siempre estuviste conmigo en todos mis logros, por más mínimos o absurdos que fueran. Gracias por eso. ❤️", imagenes: ["imagenes/torpedo.jpg"] },
+  { texto: "Mira esas vibes: niña de casita, tierna, preciosa. Nunca cambiaste, sigues siendo esa bb de siempre. ❤️", imagenes: ["imagenes/ali1.jpg","imagenes/ali2.jpg","imagenes/ali3.jpg"] },
+  { texto: "“Te amo pero como amics” — así empezó todo. Me rechazaste, pero aún así el amor se nos escapaba en cada palabra. ❤️", imagenes: ["imagenes/teamoamics.jpg"] },
+  { texto: "Cuando por fin te quitaste los filtros... me enamoré más. Tus lentes, tu boquita, tus ojitos, tus cejas... simplemente tú. ❤️", imagenes: ["imagenes/novia1.jpg","imagenes/novia2.jpg"] },
+  { texto: "Recuerdo nuestra casita en Minecraft. Tú construías palacios mientras yo me perdía en las minas. Teníamos hasta nuestros hijitos virtuales. ❤️", imagenes: ["imagenes/minecraft.jpg","imagenes/ropa1.jpg","imagenes/ropa2.jpg"] },
+  { texto: "El día del paro en el Tec. Me apoyaste aunque al inicio no estabas de acuerdo. Siempre estuviste para mí, incluso en mis locuras. ❤️", imagenes: ["imagenes/paro.jpg"] },
+  { texto: "¿Te acuerdas de esto? Solo tú me pedirías algo así, y solo yo te lo mandaría con tanto amor. Nadie más haría eso por ti. También ese día mojaste la cama xdd. Pero fuera de eso... eras tan tú, tan linda, tan sensual y tan mía. También amo esa parte tuya. ❤️", imagenes: ["imagenes/mecorazon.jpg","imagenes/mojada.jpg"] },
+  { texto: "Tus dibujos siempre me hacían sentir mal por los contrastes a los que te mandaba yo xdd. Aun así, los guardaba como tesoros. Me hacías sentir especial. ❤️", imagenes: ["imagenes/noteit.jpg"] },
+  { texto: "Tus ttas eran arte JAJA. Pero más allá de eso, ver cómo me mirabas mientras las mostrabas... eso me volvía loco. ❤️", imagenes: ["imagenes/tetas.jpg"] },
+  { texto: "No importa el tiempo que pase, ni las vueltas que dé la vida, ni la respuesta que me des hoy o mañana... Yo siempre estaré para ti, apoyándote en cada cosa que emprendas. Me encanta que sigas evolucionando como mujer y como persona, cada día aprendiendo algo nuevo y queriéndote superar más y más, incluso si parte del proceso es ya no tenerte a mi lado, lo entenderé y te desearé siempre lo mejor ❤️. Oye por cierto... ¿Por qué aún con cada día que pasa, sigues poniéndote más hermosa que el anterior? ❤️", imagenes: ["imagenes/alinueva1.jpg","imagenes/alinueva2.jpg","imagenes/alinueva3.jpg","imagenes/alinueva4.jpg"] },
+  { texto: "Al menos aquí... sí pudimos estar juntos. Quizá en esta realidad dibujada por mis recuerdos, los dos nos encontramos como siempre soñé: frente a frente, con el tiempo detenido y sin miedo a perdernos. Aunque sea en una imagen inventada, eres tú. Siempre has sido tú. Y si pudiera pedirle algo al destino, sería que un día, esa escena deje de ser imaginación… y se convierta en nuestra realidad. Porque yo aún quiero vivirla contigo. ❤️", imagenes: ["imagenes/nostalgia.jpg"] }
 ];
 let capActual = 0;
 const totalCaps = capitulos.length;
@@ -176,7 +127,7 @@ document.getElementById("siguienteCap").addEventListener("click", () => {
   } else {
     toggleSection("historia", "videos");
     videoActual = 0;
-    mostrarVideoDiario(videoActual);
+    mostrarVideoDiario(0);
   }
 });
 
@@ -246,26 +197,10 @@ document.getElementById("siguienteVideo").addEventListener("click", () => {
 // Canciones
 // ========================
 const cancionesData = [
-  {
-    title: "Sorry, I Love You - Stray Kids",
-    youtubeId: "hIacHcQUK7k",
-    note: "Bueno aquí no toqué bien el piano pero se intentó jaja."
-  },
-  {
-    title: "Cover en español de Sorry I Love You de SKZ",
-    youtubeId: "ShDSJ9rhUTk",
-    note: "Nmms no podía aguantar la risa xdd."
-  },
-  {
-    title: "Cover romanizado de Sorry I Love You de SKZ",
-    youtubeId: "hItvFg1ttsY",
-    note: "Si no pude cantar en español, mucho menos así, pero wacha que tanto te amo que lo intento JAJA."
-  },
-  {
-    title: "Cover Me de SKZ",
-    youtubeId: "zu1U-pISx6A",
-    note: "Bueno, aquí tampoco me salió perfecto, pero se hizo con todo mi corazón."
-  }
+  { title: "Sorry, I Love You - Stray Kids", youtubeId: "hIacHcQUK7k", note: "Bueno aquí no toqué bien el piano pero se intentó jaja." },
+  { title: "Cover en español de Sorry I Love You de SKZ", youtubeId: "ShDSJ9rhUTk", note: "Nmms no podía aguantar la risa xdd." },
+  { title: "Cover romanizado de Sorry I Love You de SKZ", youtubeId: "hItvFg1ttsY", note: "Si no pude cantar en español, mucho menos así, pero wacha que tanto te amo que lo intento JAJA." },
+  { title: "Cover Me de SKZ", youtubeId: "zu1U-pISx6A", note: "Bueno, aquí tampoco me salió perfecto, pero se hizo con todo mi corazón." }
 ];
 
 function cargarCanciones() {
@@ -294,27 +229,11 @@ document.getElementById("continuarCositas").addEventListener("click", () => {
 // Cositas lindas + prompt
 // ========================
 const cositasData = [
-  {
-    type: "images",
-    text: "Aquí estaré añadiendo todas las cositas lindas para ti: fotos, videos de dedicatorias, frases y más. ❤️",
-    images: ["frases/calaquitas.jpg"]
-  },
-  {
-    type: "images",
-    images: ["frases/uno.jpg", "frases/dos.jpg", "frases/tres.jpg"]
-  },
-  {
-    type: "video",
-    youtubeId: "LyDevjFr5fE"
-  },
-  {
-    type: "video",
-    youtubeId: "JLOUxj9kuwU"
-  },
-  {
-    type: "video",
-    youtubeId: "W9GY6RV_Vbg"
-  },
+  { type: "images", text: "Aquí estaré añadiendo todas las cositas lindas para ti: fotos, videos de dedicatorias, frases y más. ❤️", images: ["frases/calaquitas.jpg"] },
+  { type: "images", images: ["frases/uno.jpg","frases/dos.jpg","frases/tres.jpg"] },
+  { type: "video", youtubeId: "LyDevjFr5fE" },
+  { type: "video", youtubeId: "JLOUxj9kuwU" },
+  { type: "video", youtubeId: "W9GY6RV_Vbg" },
   {
     type: "final",
     text: `
@@ -331,46 +250,37 @@ const cositasData = [
       Gracias por cada momento que compartiste conmigo, por tu dulzura, por tu alegría, por tu manera de ver la vida y hacerme sentir tan especial. Pase lo que pase, siempre tendrás un pedazo de mi corazón.
 
       Con todo mi amor y esperando que algún día volvamos a coincidir,
-
       Diego Yorel Castelán Silva ❤️
     `,
     videoId: "ym0gklzDw3c"
   }
 ];
-
 let cositaActual = 0;
 let noCount = 0;
 
 function mostrarCosita(i) {
   const cont = document.getElementById("cositas-contenido");
   cont.innerHTML = "";
+  const d = cositasData[i];
 
-  const data = cositasData[i];
+  if (d.text) cont.innerHTML += `<p>${d.text.trim()}</p>`;
 
-  // Texto dinámico
-  if (data.text) cont.innerHTML += `<p>${data.text.trim()}</p>`;
-
-  // Imágenes
-  if (data.type === "images") {
-    data.images.forEach(src => cont.innerHTML += `<img src="${src}">`);
-  }
-  // Videos
-  else if (data.type === "video") {
+  if (d.type === "images") {
+    d.images.forEach(src => cont.innerHTML += `<img src="${src}">`);
+  } else if (d.type === "video") {
     cont.innerHTML += `
       <iframe
-        src="https://www.youtube.com/embed/${data.youtubeId}"
+        src="https://www.youtube.com/embed/${d.youtubeId}"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
         style="width:100%;height:400px;"
       ></iframe>
     `;
-  }
-  // Final + pregunta
-  else if (data.type === "final") {
+  } else if (d.type === "final") {
     cont.innerHTML += `
       <iframe
-        src="https://www.youtube.com/embed/${data.videoId}"
+        src="https://www.youtube.com/embed/${d.videoId}"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
@@ -392,12 +302,11 @@ function mostrarCosita(i) {
     btn.innerText = "Fin";
     btn.onclick = () => {
       alert("Gracias por ver todo. Ojalá haya servido para recordarte lo mucho que te amo. ❤️");
-      // Al cerrar la alerta, ocultar todas las secciones y el botón de sonido:
+      // Oculta todas las secciones excepto el fondo de YouTube
       ["intro","historia","videos","canciones","cositas","activarSonido"].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = "none";
       });
-      // Solo queda visible el <div class="video-background"> con el fondo de YouTube
     };
   } else {
     btn.innerText = "Siguiente";
@@ -408,19 +317,17 @@ function mostrarCosita(i) {
     };
   }
 
-  if (data.type === "final") {
+  if (d.type === "final") {
     const yesBtn = document.getElementById("respSi");
-    const noBtn = document.getElementById("respNo");
-    yesBtn.onclick = () => {
-      alert("nmms de vrd :0?, no fue missclick? no me engañes de esa manera JAJA");
-    };
-    noBtn.onclick = () => {
+    const noBtn  = document.getElementById("respNo");
+    yesBtn.onclick = () => alert("nmms de vrd :0?, no fue missclick? no me engañes de esa manera JAJA");
+    noBtn.onclick  = () => {
       noCount++;
       if (noCount <= 3) {
         yesBtn.style.transform = `scale(${1 + 0.3 * noCount})`;
       }
       if (noCount === 3) {
-        alert("Bueno, ya entendí… tenía que intentarlo unu");
+        alert("Bueno, ya entendí… ¡tenía que intentarlo! 😊");
       }
     };
   }
